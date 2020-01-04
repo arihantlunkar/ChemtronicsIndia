@@ -1,0 +1,25 @@
+{
+    "mainMenu": [        
+        {
+            "name": "Dashboard",
+            "link": "#ajax/dashboard.php"
+        },
+        {
+            "name": "Reports",
+            "childrens": [
+                {
+                    "list": [
+                        {
+                            "name": "Users Info",
+                            "link": "#ajax/users-info.php"
+                        },
+                        {
+                            "name": "User Form Data",
+                            "link": "#ajax/"
+                        }
+                    ]
+                }
+            ]
+        }        
+    ]
+}
