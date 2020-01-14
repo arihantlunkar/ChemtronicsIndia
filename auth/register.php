@@ -1,18 +1,16 @@
 <?php
-    require_once '../components/welcome-msg.php';
-    require_once '../components/form-wizard.php';
+    require_once './components/auth/register-form.php';
 ?>
-<template id="dashboard">
+<template id="register">
     <div class="container-fluid">
         <div class="row mt-5">
-            <welcome-msg></welcome-msg>
-            <form-wizard></form-wizard>
+            <register-form></register-form>
         </div>
     </div>
 </template>
 <script>
-    var dashboard = Vue.component('dashboard', {
-        template: '#dashboard',
+    var register = Vue.component('register', {
+        template: '#register',
         data: function () {
             return {
             };  

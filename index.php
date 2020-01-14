@@ -14,18 +14,21 @@
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-select.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome-4.7.0/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/main.css<?php echo $v; ?>">
-        <title>Chemtronics India</title>
-    </head> 
-    <?php
-        require_once 'components/vue-navbar.php';
-    ?>   
+        <link rel="stylesheet" type="text/css" href="assets/css/auth.css<?php echo $v; ?>">
+        <title>Login To Your Account</title>
+    </head>
+    <?php        
+        // if(isset($_SESSION['user_userid'])){
+        //     header('Location: home.php#ajax/dashboard.php');
+        // }
+        require_once 'auth/login.php';
+        require_once 'auth/forgot-password.php';
+        require_once 'auth/register.php';
+    ?>
     <body>      
-        <div id="mainPage">
-            <vue-navbar></vue-navbar>
-            <component :is="currentTemplate" v-if="currentTemplate"></component>
+        <div id="authApp">
+            <component :is="currentTemplate"></component>
         </div>
-        <main id="content" class="container-fluid"></main>
     </body>
 </html>
-<script type="text/javascript" src="assets/js/main.js<?php echo $v; ?>"></script>
+<script type="text/javascript" src="assets/js/auth.js<?php echo $v; ?>"></script>

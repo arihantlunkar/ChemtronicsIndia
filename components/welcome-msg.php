@@ -1,12 +1,11 @@
 <template id="welcomeMsg">
     <div class="col-md-4">
-        <div class="card text-center">
+        <div class="card text-center welcome-msg">
             <div class="card-header">
-                <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="100" height="100" class="rounded-circle block">
                 <h4>Welcome To Chemtronics</h4>
+                <h5>"Prosoft" Software</h5>
             </div>
             <div class="card-body">
-                <h5 class="card-title">"Prosoft" Software</h5>
                 <p class="card-text">Specially made for Architects & MEP Consultants. This can also be used by Professionals, Contractors, Channel Partners, Dealers OEMs & End Users.</p>
                 <p class="card-text">This software helps you selecting suitable model for treatment of Air, Water & Waste water for diversified Industries & Applications.</p>
             </div>

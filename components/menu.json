@@ -2,10 +2,12 @@
     "mainMenu": [        
         {
             "name": "Dashboard",
-            "link": "#ajax/dashboard.php"
+            "link": "#ajax/dashboard.php",
+            "icon": "fa fa-home"
         },
         {
             "name": "Reports",
+            "icon": "fa fa-pie-chart",
             "childrens": [
                 {
                     "list": [
