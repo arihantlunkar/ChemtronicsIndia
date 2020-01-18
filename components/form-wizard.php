@@ -19,37 +19,37 @@
                         <div v-show="currentTab === 0" class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="applications">Select Application</label>
-                                    <select class="form-control" id="applications"  v-model="CA">
-                                        <option :value="app.text" :id="app.id" v-for="app in applications" :disabled="app.disabled">{{app.text}}</option>
+                                    <label for="solution">Solution</label>
+                                    <select class="form-control" id="solution"  v-model="CS">
+                                        <option :value="sol.text" :id="sol.id" v-for="sol in solution" :disabled="sol.disabled">{{sol.text}}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="ventilation">Type of Ventilation</label>
-                                    <select class="form-control" id="ventilation" v-model="CV">
-                                        <option :value="ven.text" :id="ven.id" v-for="ven in ventilation" :disabled="ven.disabled">{{ven.text}}</option>
+                                    <label for="type">Type</label>
+                                    <select class="form-control" id="type" v-model="CT">
+                                        <option :value="t.text" :id="t.id" v-for="t in type" :disabled="t.disabled">{{t.text}}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="industry">Industry</label>
-                                    <select class="form-control" id="industry" v-model="CIValue">
-                                        <option :value="ind.text" :id="ind.id" v-for="ind in industry[CV]">{{ind.text}}</option>
+                                    <label for="application">Application</label>
+                                    <select class="form-control" id="application" v-model="CAValue">
+                                        <option :value="app.text" :id="app.id" v-for="app in application[CT]">{{app.text}}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group" v-show="CIValue == 'Commercial Kitchen'">
-                                    <label for="purpose1">Select Purpose</label>
+                                <div class="form-group" v-show="CAValue == 'Commercial Kitchen'">
+                                    <label for="purpose1">Purpose</label>
                                     <select class="form-control selectpicker" id="purpose1" v-model="CPValue" @change="validatingIndividualField" multiple>
                                         <option :value="pur.text" v-for="pur in purpose1">{{pur.text}}</option>
                                     </select>
                                 </div>
-                                <div class="form-group" v-show="CIValue != 'Commercial Kitchen'">
-                                    <label for="purpose2">Select Purpose</label>
+                                <div class="form-group" v-show="CAValue != 'Commercial Kitchen'">
+                                    <label for="purpose2">Purpose</label>
                                     <select class="form-control selectpicker" id="purpose2" v-model="CPValue" multiple>
                                         <option :value="pur.text" v-for="pur in purpose2">{{pur.text}}</option>
                                     </select>
@@ -92,7 +92,7 @@
             return {
                 currentTab: 0,
                 tabs: ['Basic Details', 'Calculations', 'Model Number'],
-                applications : [
+                solution : [
                     {
                         id:'air',
                         text:'Air',
@@ -109,8 +109,8 @@
                         disabled: true
                     }
                 ],
-                CA: "Air",
-                ventilation: [
+                CS: "Air",
+                type: [
                     {
                         id:'indoor',
                         text: 'Indoor',
@@ -122,8 +122,8 @@
                         disabled: false
                     }
                 ],
-                CV: "Exhaust",
-                industry: {
+                CT: "Exhaust",
+                application: {
                     Indoor: [
                         {
                             id:'commercial',
@@ -165,7 +165,7 @@
                         }
                     ]
                 }, 
-                CIValue:'Commercial Kitchen',
+                CAValue:'Commercial Kitchen',
                 purpose1:[
                     {
                         id:'fireSafety',
@@ -212,29 +212,29 @@
             };  
         },
         computed: {
-            CI() {
+            CA() {
                 return { 
-                    ventilation: this.CV ,
-                    value: this.CIValue
+                    type: this.CT ,
+                    value: this.CAValue
                 }
             },
             purpose(){
                 return { 
-                    industry: this.CI.value ,
+                    application: this.CA.value ,
                     value: this.CPValue
                 }
             },
             otherPurpose(){
                 return { 
-                    industry: this.CI.value ,
+                    application: this.CA.value ,
                     value: this.COPValue
                 }
             },
             formData(){
                 return {
+                    CS: this.CS,
+                    CT: this.CT,
                     CA: this.CA,
-                    CV: this.CV,
-                    CI: this.CI,
                     purpose: this.purpose,
                     otherPurpose: this.otherPurpose
                 }
@@ -249,7 +249,7 @@
             },
             validateTab0:function(){
                 var $this = this                
-                if($this.CA != '' && $this.CV != '' && $this.CI.value != '' && $this.purpose.value.length>0){
+                if($this.CS != '' && $this.CT != '' && $this.CA.value != '' && $this.purpose.value.length>0){
                     if($this.purpose.value.includes('Other') && $this.otherPurpose.value==''){
                         $this.errorMsg = "Please fill all the details"
                     }else{

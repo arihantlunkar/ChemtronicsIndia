@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="firstname">First name *</label>
+                            <label for="firstname">First Name *</label>
                             <input type="text" name="firstname" class="form-control" id="firstname" placeholder="First Name" @input="inputChanged('firstname')" v-model="formData.firstname">
                             <template v-if="errorMsg.firstname!==''">
                                 <div class="error mt-2">{{errorMsg.firstname}}</div>
@@ -17,7 +17,7 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="lastname">Last name *</label>
+                            <label for="lastname">Last Name *</label>
                             <input type="text" name="lastname" class="form-control" id="lastname" placeholder="Last Name" @input="inputChanged('lastname')" v-model="formData.lastname">
                             <template v-if="errorMsg.lastname!==''">
                                 <div class="error mt-2">{{errorMsg.lastname}}</div>
@@ -77,6 +77,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="userProfile">User Profile </label>
+                            <select class="form-control selectpicker" id="userProfile" v-model="formData.userProfile">
+                                <option :value="up.text" v-for="up in userProfile" >{{up.text}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group" v-if="formData.userProfile.includes('Other')">
+                            <label for="oUserProfile">Other User Profile *</label>
+                            <input type="text" class="form-control" id="oUserProfile" placeholder="Other Profile" @input="inputChanged('oUserProfile')" v-model="formData.oUserProfile">
+                            <template v-if="errorMsg.oUserProfile!==''">
+                                <div class="error mt-2">{{errorMsg.oUserProfile}}</div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group mt-4 text-center">
                     <template v-if="error!==''">
                         <div class="error mb-2">{{error}}</div>
@@ -103,7 +122,9 @@
                     mobile:'',
                     cc:'+91',
                     password:'',
-                    cPassword:''
+                    cPassword:'',
+                    userProfile:'End User',
+                    oUserProfile:''
                 },
                 error:'',
                 errorMsg:{
@@ -112,9 +133,48 @@
                     email:'',
                     mobile:'',
                     Password:'',
-                    cPassword:''
+                    cPassword:'',
+                    oUserProfile:''
                 },
-                countryCode:['+1','+7','+20','+27','+30','+31','+32','+33','+34','+36','+39','+40','+41','+43','+44','+45','+46','+47','+48','+49','+51','+52','+53','+54','+55','+56','+57','+58','+60','+61','+62','+63','+64','+65','+66','+81','+82','+84','+86','+90','+91','+92','+93','+94','+95','+98','+211','+212','+213','+216','+218','+220','+221','+222','+223','+224','+225','+226','+227','+228','+229','+230','+231','+232','+233','+234','+235','+236','+237','+238','+239','+240','+241','+242','+243','+244','+245','+246','+247','+248','+249','+250','+251','+252','+253','+254','+255','+256','+257','+258','+260','+261','+262','+263','+264','+265','+266','+267','+268','+269','+290','+291','+297','+298','+299','+350','+351','+352','+353','+354','+355','+356','+357','+358','+359','+370','+371','+372','+373','+374','+375','+376','+377','+378','+380','+381','+382','+383','+385','+386','+387','+389','+420','+421','+423','+500','+501','+502','+503','+504','+505','+506','+507','+508','+509','+590','+591','+592','+593','+594','+595','+596','+597','+598','+599','+670','+672','+673','+674','+675','+676','+677','+678','+679','+680','+681','+682','+683','+685','+686','+687','+688','+689','+690','+691','+692','+850','+852','+853','+855','+856','+880','+886','+960','+961','+962','+963','+964','+965','+966','+967','+968','+970','+971','+972','+973','+974','+975','+976','+977','+992','+993','+994','+995','+996','+998']
+                countryCode:['+1','+7','+20','+27','+30','+31','+32','+33','+34','+36','+39','+40','+41','+43','+44','+45','+46','+47','+48','+49','+51','+52','+53','+54','+55','+56','+57','+58','+60','+61','+62','+63','+64','+65','+66','+81','+82','+84','+86','+90','+91','+92','+93','+94','+95','+98','+211','+212','+213','+216','+218','+220','+221','+222','+223','+224','+225','+226','+227','+228','+229','+230','+231','+232','+233','+234','+235','+236','+237','+238','+239','+240','+241','+242','+243','+244','+245','+246','+247','+248','+249','+250','+251','+252','+253','+254','+255','+256','+257','+258','+260','+261','+262','+263','+264','+265','+266','+267','+268','+269','+290','+291','+297','+298','+299','+350','+351','+352','+353','+354','+355','+356','+357','+358','+359','+370','+371','+372','+373','+374','+375','+376','+377','+378','+380','+381','+382','+383','+385','+386','+387','+389','+420','+421','+423','+500','+501','+502','+503','+504','+505','+506','+507','+508','+509','+590','+591','+592','+593','+594','+595','+596','+597','+598','+599','+670','+672','+673','+674','+675','+676','+677','+678','+679','+680','+681','+682','+683','+685','+686','+687','+688','+689','+690','+691','+692','+850','+852','+853','+855','+856','+880','+886','+960','+961','+962','+963','+964','+965','+966','+967','+968','+970','+971','+972','+973','+974','+975','+976','+977','+992','+993','+994','+995','+996','+998'],
+                userProfile:[
+                    {
+                        id:'endUser',
+                        text:'End User'
+                    },
+                    {
+                        id:'mepConsultant',
+                        text:'M E P Consultant'
+                    },
+                    {
+                        id:'architect',
+                        text:'Architect'
+                    },
+                    {
+                        id:'hvacContractor',
+                        text:'HVAC Contractor'
+                    },
+                    {
+                        id:'oem',
+                        text:'O E M'
+                    },
+                    {
+                        id:'channelPartner',
+                        text:'Channel Partner'
+                    },
+                    {
+                        id:'bmsAgency',
+                        text:'B M S Agency'
+                    },
+                    {
+                        id:'students',
+                        text:'Students'
+                    },
+                    {
+                        id:'other',
+                        text:'Other'
+                    }
+                ]
             }
         },
         computed: {
@@ -157,6 +217,12 @@
                 }else if(v=='cPassword'){
                     if (this.formData.cPassword && $this.validateCPassword(this.formData.cPassword)[1] == 1){
                         $this.errorMsg[v] =  $this.validateCPassword(this.formData.cPassword)[0]
+                    }else{
+                        $this.errorMsg[v] =  ''
+                    }
+                }else if(v=='oUserProfile'){
+                    if (this.formData.oUserProfile && $this.validateOUserProfile(this.formData.oUserProfile)[1] == 1){
+                        $this.errorMsg[v] =  $this.validateOUserProfile(this.formData.oUserProfile)[0]
                     }else{
                         $this.errorMsg[v] =  ''
                     }
@@ -331,15 +397,54 @@
 					return [" ",0];
 				}
             },
+            validateOUserProfile:function(oUserProfile, optional){
+                var oUserProfileReg =  /^[A-Za-z\s]+$/;
+				if(oUserProfile == "" && optional == 1)
+				{
+					return [" ",0];
+				}
+				if(oUserProfile == '')
+				{
+					return ["Other user profile field cannot be blank",1];
+				}
+				else if(oUserProfile.length > 30)
+				{
+					return ["Other user profile cannot exceed 30 characters", 1];
+				}
+				else if(oUserProfile.length < 2)
+				{
+					return ["Other user profile cannot be less than 2 characters",1];
+				}
+				else if(!oUserProfileReg.test(oUserProfile))
+				{
+					return ["Not a valid user profile",1];
+				}
+				else
+				{
+					return [" ",0];
+                }
+            },
             validateForm:function(){
                 let $this = this
-                if($this.formData.firstname && $this.formData.lastname && $this.formData.email && $this.formData.mobile && $this.formData.password && $this.formData.cPassword && $this.formData.password === $this.formData.cPassword){
-                    if($this.errorMsg.firstname === '' && $this.errorMsg.firstname === '' && $this.errorMsg.email === '' && $this.errorMsg.mobile === '' &&  $this.errorMsg.password === '' &&  $this.errorMsg.cPassword === ''){
-                        $this.error = ''
-                        $this.submitForm()
+                if($this.formData.firstname && $this.formData.lastname && $this.formData.email && $this.formData.mobile && $this.formData.password && $this.formData.cPassword && $this.formData.password === $this.formData.cPassword && $this.formData.userProfile){
+                    if($this.formData.userProfile != 'Other'){
+                        if($this.errorMsg.firstname === '' && $this.errorMsg.firstname === '' && $this.errorMsg.email === '' && $this.errorMsg.mobile === '' &&  $this.errorMsg.password === '' &&  $this.errorMsg.cPassword === '' && $this.errorMsg.oUserProfile === ''){
+                            $this.error = ''
+                            $this.formData.oUserProfile = ''
+                            $this.submitForm()
+                        }else{
+                            $this.error = 'Please resolve validation errors.'
+                        }
+                    }else if($this.formData.userProfile === 'Other' && $this.formData.oUserProfile != ''){
+                        if($this.errorMsg.firstname === '' && $this.errorMsg.firstname === '' && $this.errorMsg.email === '' && $this.errorMsg.mobile === '' &&  $this.errorMsg.password === '' &&  $this.errorMsg.cPassword === '' && $this.errorMsg.oUserProfile === ''){
+                            $this.error = ''
+                            $this.submitForm()
+                        }else{
+                            $this.error = 'Please resolve validation errors.'
+                        }
                     }else{
-                        $this.error = 'Please resolve validation errors.'
-                    }
+                        $this.error = 'Other user profile is required.'
+                    }                    
                 }else if($this.formData.firstname === ''){
                     $this.error = 'First name is required.'
                 }else if($this.formData.lastname === ''){
