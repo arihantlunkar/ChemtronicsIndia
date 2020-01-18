@@ -62,8 +62,8 @@
                         <div class="form-group">
                             <label for="password">Password *</label>
                             <input type="password" class="form-control" id="password" placeholder="Password" @input="inputChanged('password')" v-model="formData.password">
-                            <template v-if="errorMsg.Password!==''">
-                                <div class="error mt-2">{{errorMsg.Password}}</div>
+                            <template v-if="errorMsg.password!==''">
+                                <div class="error mt-2">{{errorMsg.password}}</div>
                             </template>
                         </div>
                     </div>
@@ -428,7 +428,7 @@
                 let $this = this
                 if($this.formData.firstname && $this.formData.lastname && $this.formData.email && $this.formData.mobile && $this.formData.password && $this.formData.cPassword && $this.formData.password === $this.formData.cPassword && $this.formData.userProfile){
                     if($this.formData.userProfile != 'Other'){
-                        if($this.errorMsg.firstname === '' && $this.errorMsg.firstname === '' && $this.errorMsg.email === '' && $this.errorMsg.mobile === '' &&  $this.errorMsg.password === '' &&  $this.errorMsg.cPassword === '' && $this.errorMsg.oUserProfile === ''){
+                        if($this.errorMsg.firstname === '' && $this.errorMsg.lastname === '' && $this.errorMsg.email === '' && $this.errorMsg.mobile === '' &&  $this.errorMsg.password === '' &&  $this.errorMsg.cPassword === '' && $this.errorMsg.oUserProfile === ''){
                             $this.error = ''
                             $this.formData.oUserProfile = ''
                             $this.submitForm()
@@ -436,7 +436,7 @@
                             $this.error = 'Please resolve validation errors.'
                         }
                     }else if($this.formData.userProfile === 'Other' && $this.formData.oUserProfile != ''){
-                        if($this.errorMsg.firstname === '' && $this.errorMsg.firstname === '' && $this.errorMsg.email === '' && $this.errorMsg.mobile === '' &&  $this.errorMsg.password === '' &&  $this.errorMsg.cPassword === '' && $this.errorMsg.oUserProfile === ''){
+                        if($this.errorMsg.firstname === '' && $this.errorMsg.lastname === '' && $this.errorMsg.email === '' && $this.errorMsg.mobile === '' &&  $this.errorMsg.password === '' &&  $this.errorMsg.cPassword === '' && $this.errorMsg.oUserProfile === ''){
                             $this.error = ''
                             $this.submitForm()
                         }else{
