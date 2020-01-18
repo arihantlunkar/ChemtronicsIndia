@@ -19,5 +19,6 @@ var authApp = new Vue({
         var $this = this        
     },
     updated(){
+        $('.selectpicker').selectpicker();
     }
 })

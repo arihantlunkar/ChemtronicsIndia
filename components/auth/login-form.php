@@ -7,7 +7,7 @@
             <form method="post" id="loginForm" @submit.prevent="validateForm">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" name="email" class="form-control" id="username" placeholder="Email" @input="inputChanged('Username')" v-model="formData.username">
+                    <input type="text" name="email" class="form-control" id="username" placeholder="username@domain.com" @input="inputChanged('Username')" v-model="formData.username">
                     <template v-if="errorMsg.Username!==''">
                         <div class="error mt-2">{{errorMsg.Username}}</div>
                     </template>
@@ -23,12 +23,11 @@
                     <template v-if="error!==''">
                         <div class="error mb-2">{{error}}</div>
                     </template>
-                    <input type="submit" class="btn btn-primary btn-block" name="submit" @keyup.enter="validateForm" value="Sign In" />
+                    <button type="submit" class="btn btn-primary btn-block" name="submit" @keyup.enter="validateForm" >Sign In</button>
                 </div>
             </form>
         </div>
         <div class="card-footer text-center">
-            <div class="mb-1 footer-text" @click="changeTemp('forgot-password')"><span>Forgot Password?</span></div>
             <div class="font-weight-semibold footer-text" @click="changeTemp('register')">If you are not a member, <span>Please Register.</span></div>
         </div>
     </div>

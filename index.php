@@ -15,6 +15,7 @@
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-select.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome-4.7.0/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/auth.css<?php echo $v; ?>">
+        <link rel="stylesheet" type="text/css" href="assets/css/common.css<?php echo $v; ?>">
         <title>Login To Your Account</title>
     </head>
     <?php        
@@ -22,7 +23,6 @@
         //     header('Location: home.php#ajax/dashboard.php');
         // }
         require_once 'auth/login.php';
-        require_once 'auth/forgot-password.php';
         require_once 'auth/register.php';
     ?>
     <body>      

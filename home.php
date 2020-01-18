@@ -15,6 +15,7 @@
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-select.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome-4.7.0/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/main.css<?php echo $v; ?>">
+        <link rel="stylesheet" type="text/css" href="assets/css/common.css<?php echo $v; ?>">
         <title>Chemtronics India</title>
     </head> 
     <?php
