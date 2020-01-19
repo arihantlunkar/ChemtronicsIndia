@@ -1,5 +1,14 @@
 <?php
     $v = '?v1.1';
+	
+	if (session_status() == PHP_SESSION_NONE) {
+		session_start();
+	}
+	
+	if (isset($_SESSION['email']) && isset($_SESSION['username'])) {
+		header('Location: home.php#ajax/dashboard.php');
+		exit(0);
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,10 +27,7 @@
         <link rel="stylesheet" type="text/css" href="assets/css/common.css<?php echo $v; ?>">
         <title>Login To Your Account</title>
     </head>
-    <?php        
-        // if(isset($_SESSION['user_userid'])){
-        //     header('Location: home.php#ajax/dashboard.php');
-        // }
+    <?php    
         require_once 'auth/login.php';
         require_once 'auth/register.php';
     ?>

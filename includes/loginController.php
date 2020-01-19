@@ -28,9 +28,12 @@ if($data)
 			}
 			else
 			{
-				$conn->close();
-				header('Location: ../home.php#ajax/dashboard.php');
-				exit(0);
+				if (session_status() == PHP_SESSION_NONE) {
+					session_start();
+				}
+				
+				$_SESSION['email'] = $row['email'];
+				$_SESSION['username'] = $row['firstName']." ".$row['lastName'];
 			}
 		}
 		else 

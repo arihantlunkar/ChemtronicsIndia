@@ -1,5 +1,14 @@
 <?php
     $v = '?v1.1';
+	
+	if (session_status() == PHP_SESSION_NONE) {
+		session_start();
+	}
+	
+	if (empty($_SESSION['email']) || empty($_SESSION['username'])) {
+		header('Location: index.php');
+		exit(0);
+	}
 ?>
 <!DOCTYPE html>
 <html>

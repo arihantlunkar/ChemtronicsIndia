@@ -146,6 +146,10 @@
 					password: $this.formData.password
                 }).then(function(response) {
                     $this.error = response.data;
+					if($this.error === "")
+					{
+						window.location.href = 'home.php#ajax/dashboard.php';
+					}
                 }).catch(function(error) {
                     console.log(error);
                 });	
