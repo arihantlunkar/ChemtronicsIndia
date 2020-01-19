@@ -19,7 +19,7 @@
                         <div class="error mt-2">{{errorMsg.Password}}</div>
                     </template>
                 </div>
-                <div class="form-group mt-4">
+                <div class="form-group mt-4 text-center">
                     <template v-if="error!==''">
                         <div class="error mb-2">{{error}}</div>
                     </template>
@@ -140,48 +140,13 @@
             },
             submitForm:function(){
                 let $this = this
-                $this.sending = true
-                // let obj = {
-                //     email:this.formData.username,
-                //     password:this.formData.password,
-                //     submit:'submit'
-                // }
-                var session_url = 'includes/login-handling.php';
-                // var basicAuth = 'Basic ' + btoa(this.formData.username + ':' + this.formData.password);
-                // var uname = 'user';
-                // var pass = 'password';
+                var session_url = 'includes/loginController.php';
                 axios.post(session_url, {
-                    auth: {
-                        username: $this.formData.username,
-                        password: $this.formData.password
-                    }
+					username: $this.formData.username,
+					password: $this.formData.password
                 }).then(function(response) {
-                    $this.sending = false
-                    let output = response.data
-                    if(output.msg==0 && output.url==""){
-                        $this.sending = true
-                        // let url = window.location.href
-                        // let urlInd = url.indexOf('index.php?e=s')
-                        // if(urlInd !== -1){
-                        //     var res = url.replace("index.php?e=s", "home.php");
-                        //     window.location.href = res;
-                        // }else{
-                        //     window.location.href = "home.php#ajax/dashboard.php";
-                        // }
-                    }else if(output.msg !== 0){
-                        // if(output.msg==1 || output.msg==2){
-                        //     $this.$emit('resetpw',output.msg)
-                        // }else if(output.msg==3){
-                        //     $this.$emit('changtemp','blocked-message')
-                        // }else{
-                        //     $this.error = output.msg
-                        // }
-                    }else if(output.url!==""){
-                        // window.location.href = output.url;
-                    }else{
-                    }
+                    $this.error = response.data;
                 }).catch(function(error) {
-                    $this.sending = false
                     console.log(error);
                 });	
             },

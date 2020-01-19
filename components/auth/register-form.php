@@ -308,7 +308,7 @@
 				{
 					return ["Not a valid email address",1];
                 }
-                else if(!avoidFreeEmail.test(email))
+                else if(!avoidFreeEmail.test(email.toLowerCase()))
 				{
 					return ["Only company email address allowed",1];
 				}
