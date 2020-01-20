@@ -1,5 +1,6 @@
 <?php
 require_once 'config/db.php';
+require_once 'emailController.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 $msg = ""; 
@@ -37,8 +38,17 @@ if($data)
 			$result = $conn->query($sqlQuery);
 
 			if ($result) 
-			{		
-				$msg = "Thank you for registering with Chemtronics India. In order to complete your registration, please click the confirmation link in the email that we have sent to you.";
+			{			
+				$username = $firstname." ".$lastname;
+				$complete_link = VERIFICATION_LINK. "?token=".$token;
+				if(sendVerificationEmail(FROM_EMAIL_ADDRESS, $email, $username, $complete_link))
+				{		
+					$msg = "Thank you for registering with Chemtronics India. In order to complete your registration, please click the confirmation link in the email that we have sent to you.";
+				}
+				else
+				{
+					$msg = "Sending verification email failed.";
+				}
 			} else 
 			{
 				$msg = "Database error: Could not register user.";
