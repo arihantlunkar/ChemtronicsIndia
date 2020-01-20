@@ -1,11 +1,13 @@
 <?php
     $v = '?v1.2';
 	
-	if (session_status() == PHP_SESSION_NONE) {
+	if (session_status() == PHP_SESSION_NONE) 
+	{
 		session_start();
 	}
 	
-	if (empty($_SESSION['email']) || empty($_SESSION['username'])) {
+	if (empty($_SESSION['email']) || empty($_SESSION['username'])) 
+	{
 		header('Location: index.php');
 		exit(0);
 	}

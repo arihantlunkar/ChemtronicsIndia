@@ -1,11 +1,12 @@
 <?php
-require_once 'config/db.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
-
 $msg = ""; 
+
 if($data)
-{	
+{		
+	require_once 'config/db.php';
+
 	$email = $data['username'];
 	$password = $data['password'];
 
@@ -45,8 +46,8 @@ if($data)
 	{
 		$msg = "Database error: Login failed.";
 	}
-}
 
-$conn->close();
+	$conn->close();
+}
 
 echo $msg;

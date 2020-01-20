@@ -1,11 +1,22 @@
 <?php
     $v = '?v1.2';
 	
-	if (session_status() == PHP_SESSION_NONE) {
+	require_once 'includes/verifyTokenController.php';
+	
+	if (session_status() == PHP_SESSION_NONE) 
+	{
 		session_start();
 	}
 	
-	if (isset($_SESSION['email']) && isset($_SESSION['username'])) {
+	if (isset($_GET['token'])) 
+	{
+		verifyToken($_GET['token']);
+		header('Location: index.php');
+		exit(0);
+	}
+	
+	if (isset($_SESSION['email']) && isset($_SESSION['username'])) 
+	{
 		header('Location: home.php#ajax/dashboard.php');
 		exit(0);
 	}

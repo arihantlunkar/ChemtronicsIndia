@@ -1,12 +1,13 @@
 <?php
-require_once 'config/db.php';
-require_once 'emailController.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 $msg = ""; 
 
 if($data)
-{
+{	
+	require_once 'config/db.php';
+	require_once 'emailController.php';
+	
 	$firstname = $data['firstname'];
 	$lastname = $data['lastname'];
 	$companyName = '';
@@ -59,8 +60,8 @@ if($data)
 	{
 		$msg = "Database error: Could not register user.";
 	}
-}
 
-$conn->close();
+	$conn->close();
+}
 
 echo $msg;
