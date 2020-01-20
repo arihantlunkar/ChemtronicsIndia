@@ -1,5 +1,5 @@
 <?php
-    $v = '?v1.1';
+    $v = '?v1.2';
 ?>
 <!DOCTYPE html>
 <html>

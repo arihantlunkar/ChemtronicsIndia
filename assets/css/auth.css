@@ -25,3 +25,7 @@
     cursor: pointer;
     color:#02b389
 }
+input.form-control::placeholder{color:#f8f8f8;font-size:10px;font-style:italic;opacity:1}
+input::-webkit-input-placeholder{color:#f8f8f8;font-size:10px;font-style:italic;opacity:1}
+input::-moz-input-placeholder{color:#f8f8f8;font-size:10px;font-style:italic;opacity:1}
+input::-ms-input-placeholder{color:#f8f8f8;font-size:10px;font-style:italic;opacity:1}
