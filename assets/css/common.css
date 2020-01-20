@@ -66,10 +66,6 @@ body{
     border-color: #02b389;
     box-shadow: none;
 }
-option:disabled{
-    background: #dae0e5;
-    color: #999;
-}
 .error{
     color: #f44336;
 }
@@ -78,6 +74,17 @@ option:disabled{
         display: none !important;
     }
 }
-input::-webkit-input-placeholder{color:#f8f8f8;font-size:10px;font-style:italic;opacity:1}
-input::-moz-input-placeholder{color:#f8f8f8;font-size:10px;font-style:italic;opacity:1}
-input::-ms-input-placeholder{color:#f8f8f8;font-size:10px;font-style:italic;opacity:1}
+input.form-control::placeholder{color:#c0c0c0;font-size:10px;font-style:italic;opacity:1}
+input::-webkit-input-placeholder{color:#c0c0c0;font-size:10px;font-style:italic;opacity:1}
+input::-moz-input-placeholder{color:#c0c0c0;font-size:10px;font-style:italic;opacity:1}
+input::-ms-input-placeholder{color:#c0c0c0;font-size:10px;font-style:italic;opacity:1}
+.dropdown-item.active, .dropdown-item:active{
+    background-image: linear-gradient(to right, #02b389, #19caa0 );
+}
+.dropdown-item.disabled, .dropdown-item:disabled {
+    color: #b5b5b5;
+    background-color: #ececec;
+}
+.bootstrap-select .dropdown-menu li a{
+    font-size: 14px;
+}
