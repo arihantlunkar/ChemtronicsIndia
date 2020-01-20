@@ -47,7 +47,7 @@ if($data)
 	}
 	else
 	{
-		$msg = "Database error: Login failed.";
+		$msg = "Database error: Could not register user.";
 	}
 }
 
