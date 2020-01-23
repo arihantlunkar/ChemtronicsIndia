@@ -465,6 +465,7 @@
             },
             submitForm:function(){
                 let $this = this
+                $this.sending = true
                 var session_url = 'includes/registerController.php';
                 axios.post(session_url, {
                     firstname: $this.formData.firstname,
@@ -475,6 +476,16 @@
 					password: $this.formData.password,
 					userProfile: ($this.formData.userProfile === 'Other') ? $this.formData.oUserProfile : $this.formData.userProfile
                 }).then(function(response) {
+                    $this.sending = false
+                    $("#userProfile").val('End User').selectpicker("refresh");
+                    $this.formData.firstname = ''
+                    $this.formData.lastname = ''
+                    $this.formData.email = ''
+                    $this.formData.cc = '+91'
+                    $this.formData.mobile = ''
+                    $this.formData.password = ''
+                    $this.formData.cPassword = ''
+                    $this.formData.oUserProfile = ''
 					$this.error = response.data;
                 }).catch(function(error) {
                     console.log(error);

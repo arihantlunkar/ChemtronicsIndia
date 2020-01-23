@@ -140,11 +140,13 @@
             },
             submitForm:function(){
                 let $this = this
+                $this.sending = true
                 var session_url = 'includes/loginController.php';
                 axios.post(session_url, {
 					username: $this.formData.username,
 					password: $this.formData.password
                 }).then(function(response) {
+                    $this.sending = false
                     $this.error = response.data;
 					if($this.error === "")
 					{
