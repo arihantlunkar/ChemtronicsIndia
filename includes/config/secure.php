@@ -14,7 +14,7 @@ if (defined('DEVELOPER_KEY') && strcasecmp(DEVELOPER_KEY, "dqnBKK-?3gq4^Nk+") ==
 else
 {
 	//Only ajax call allowed from chemtronics website
-	if(isset($_SERVER["HTTP_REFERER"]) && strcmp($_SERVER["HTTP_REFERER"], "http://localhost/ChemtronicsIndia/home.php") == 0) 
+	if(isset($_SERVER["HTTP_REFERER"]) && (strcmp($_SERVER["HTTP_REFERER"], "http://localhost/ChemtronicsIndia/home.php") == 0 || strcmp($_SERVER["HTTP_REFERER"], "http://localhost/ChemtronicsIndia/index.php") == 0)) 
 	{
 		;
 	}

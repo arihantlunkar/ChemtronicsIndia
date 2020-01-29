@@ -24,7 +24,7 @@
                         <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle profile-img">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right pullDown" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="includes/logoutController.php"><i class="fa fa-sign-out mr-2" aria-hidden="true"></i> Log Out</a>
+                        <a class="dropdown-item" href="includes/SessionController.php?session=logout"><i class="fa fa-sign-out mr-2" aria-hidden="true"></i> Log Out</a>
                     </div>
                 </li>   
             </ul>

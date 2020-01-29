@@ -466,7 +466,7 @@
             submitForm:function(){
                 let $this = this
                 $this.sending = true
-                var session_url = 'includes/registerController.php';
+                var session_url = 'includes/SessionController.php?session=register';
                 axios.post(session_url, {
                     firstname: $this.formData.firstname,
 					lastname: $this.formData.lastname,

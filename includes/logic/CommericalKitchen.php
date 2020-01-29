@@ -92,6 +92,15 @@ class CommericalKitchen extends Application implements ApplicationInterface
 		} 
 		
 		$this->strModelNo = $strPrefix.$strPostfix;
+		
+		if(strcmp($this->strModelNo, "") == 0)
+		{
+			$this->strModelNo = "No Model Found";
+		}
+		else
+		{
+			$this->strModelNo = "Model number is : " . $this->strModelNo;
+		}
 	}
 	
 	public function runFormula()
@@ -130,7 +139,7 @@ class CommericalKitchen extends Application implements ApplicationInterface
 	
 	public function printModelNo()
 	{		
-		return $this->fMF != -1 ? "Model number is : " . $this->strModelNo : "Treatment Time Is Not Sufficient, contact Solution provider.";
+		return $this->fMF != -1 ? $this->strModelNo : "Treatment Time Is Not Sufficient, contact Solution provider.";
 	}
 }
 

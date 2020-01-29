@@ -1,7 +1,7 @@
 <?php
     $v = '?v1.3';
 	
-	require_once 'includes/verifyTokenController.php';
+	require_once 'includes/session/VerifyToken.php';
 	
 	if (session_status() == PHP_SESSION_NONE) 
 	{
@@ -10,7 +10,7 @@
 	
 	if (isset($_GET['token'])) 
 	{
-		verifyToken($_GET['token']);
+		(new VerifyToken($_GET['token']))->run();
 		header('Location: index.php');
 		exit(0);
 	}
