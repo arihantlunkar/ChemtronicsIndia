@@ -588,6 +588,15 @@
                 var $this = this
                 $this.refreshAnimation()
                 $this.currentTab = 2
+				
+                var session_url = 'includes/DataController.php';
+                axios.post(session_url, {
+                    customerData:formData
+                }).then(function(response) {
+					$this.errorMsg = response.data;					
+                }).catch(function(error) {
+                    console.log(error);
+                });    
             },
             refreshAnimation(){
                 var $this = this
