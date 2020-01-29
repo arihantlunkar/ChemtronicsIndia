@@ -1,5 +1,5 @@
 <?php
-    $v = '?v1.2';
+    $v = '?v1.3';
 	
 	if (session_status() == PHP_SESSION_NONE) 
 	{
@@ -31,11 +31,13 @@
     </head> 
     <?php
         require_once 'components/vue-navbar.php';
+        //require_once 'components/vue-footer.php';
     ?>   
     <body>      
         <div id="mainPage">
             <vue-navbar></vue-navbar>
             <component :is="currentTemplate" v-if="currentTemplate"></component>
+            <!-- <vue-footer></vue-footer> -->
         </div>
         <main id="content" class="container-fluid"></main>
     </body>

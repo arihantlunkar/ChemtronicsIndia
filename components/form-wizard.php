@@ -388,6 +388,9 @@
                     calculationData: tab1Data                  
                 }
             },
+            updatedCurrentTab(){
+                return this.currentTab
+            }            
         },
         methods:{
             validateTab:function(clickedTab){
@@ -410,6 +413,7 @@
                         $this.errorMsg = ''
                         $this.refreshAnimation()
                         $this.currentTab = 1
+                        $(".selectpicker").selectpicker("refresh");
                     }
                 }else{
                     $this.errorMsg = "Please fill all the details"
@@ -423,10 +427,12 @@
                         $this.errorMsg = "Please fill all the details"
                         break;
                     }else{
-                        $this.errorMsg = ''
-                        $this.submitForm($this.formData)
+                        $this.errorMsg = ''                        
                     }
-                }           
+                } 
+                if($this.errorMsg == ''){
+                    $this.submitForm($this.formData)
+                }          
             },
             validatingIndividualField:function(field){
                 var $this = this
@@ -580,45 +586,34 @@
             },
             submitForm:function(formData){
                 var $this = this
-                console.log(formData)
-                // var requestObj = {
-                //     url: 'includes/saveFormData.php',
-                //     data: {type:'insertFormData',customerData:formData},
-                //     type: 'post',
-                //     dataType: 'text',
-                // }
-                // var ajaxRequest = fetchAjaxData(requestObj);
-                // ajaxRequest.success(function(output){
-                    
-                // })
-                // ajaxRequest.error(function(xhr){
-                //     logError(xhr.responseText,"Get Customer data updates Data");
-                // })                
-            },
-            movingTabWidth(){
-                var $this = this
-                var total_steps = $this.tabs.length
-                var move_distance = $('.form-wizard').width() / total_steps;
-                $('.form-wizard').find('.moving-tab').css('width', move_distance); 
-                if($this.currentTab == 1){
-                    move_distance = 0;
-                }else if($this.currentTab == total_steps){
-                    move_distance += 8;
-                }
-                return move_distance
+                $this.refreshAnimation()
+                $this.currentTab = 2
             },
             refreshAnimation(){
                 var $this = this
-                var width = $this.movingTabWidth()
-                var vertical_level = 0;               
-                $('.moving-tab').css({
-                    'transform':'translate3d(' + width + 'px, ' + vertical_level +  'px, 0)',
-                    'transition': 'all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)'
-                });
+                setTimeout(() => {
+                    var total_steps = $this.tabs.length
+                    var move_distance = $('.form-wizard').width() / total_steps;
+                    var indexTemp = $this.currentTab
+                    var step_width = move_distance;
+                    move_distance = move_distance * indexTemp;
+                    var current = $this.currentTab + 1;
+                    if(current == 1){
+                        move_distance -= 8;
+                    }else if(current == total_steps){
+                        move_distance += 8;
+                    }
+                    $('.form-wizard').find('.moving-tab').css('width', step_width); 
+                    var vertical_level = 0;               
+                    $('.moving-tab').css({
+                        'transform':'translate3d(' + move_distance + 'px, ' + vertical_level +  'px, 0)',
+                        'transition': 'all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)'
+                    });
+                }, 100);                
             }
         },
         mounted() {     
-            this.movingTabWidth()               
+            this.refreshAnimation()               
         },
         created(){
             

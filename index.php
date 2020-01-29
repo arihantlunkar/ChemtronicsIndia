@@ -1,5 +1,5 @@
 <?php
-    $v = '?v1.2';
+    $v = '?v1.3';
 	
 	require_once 'includes/verifyTokenController.php';
 	
