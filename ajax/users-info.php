@@ -34,15 +34,15 @@
                 var $this = this;
                 $('#userInfo').DataTable({
                     "processing": true,
-					"serverSide": true,
+					"serverSide": false,
 					"ajax": "includes/UsersInfoController.php",                    
                     "columns": [
 						{ "data": "firstName" },
 						{ "data": "lastName" },
+                        { "data": "email" },
 						{ "data": "countryCode" },
 						{ "data": "mobileNumber" },
 						{ "data": "endUser" },
-						{ "data": "email" }
                     ]
                 })
             }
