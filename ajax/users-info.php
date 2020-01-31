@@ -4,7 +4,18 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <table id="userInfo" class="table table-striped table-bordered" width="100%"></table>
+                        <table id="userInfo" class="table table-striped table-bordered" width="100%">
+							<thead>
+								<tr>
+									<th>First name</th>
+									<th>Last name</th>
+									<th>Email</th>
+									<th>Country Code</th>
+									<th>Mobile Number</th>
+									<th>User Profile</th>
+								</tr>
+							</thead>
+						</table>
                     </div>
                 </div>
             </div>
@@ -21,24 +32,17 @@
         methods:{
             createDatables:function(){
                 var $this = this;
-                // var dataSet = [
-                //     [ "Vivek", "Lunkar", "vivek.lunkar@grandcanals.com", "+91", "8097124907", "Engg" ],
-                //     [ "Arihant", "Lunkar", "arihant-cse15@snu.edu.in", "+91", "9560810245", "Architect" ],
-                // ];
                 $('#userInfo').DataTable({
-                    "ajax" : {
-                        "url": '',
-                        "data": function(json){                                
-                            return json;
-                        }
-                    },                    
-                    columns: [
-                        { "title":'First Name'},
-                        { "title":'Last Name'},
-                        { "title":'Email'},
-                        { "title":'Country Code'},
-                        { "title":'Mobile Number'},
-                        { "title":'User Profile'},
+                    "processing": true,
+					"serverSide": true,
+					"ajax": "includes/UsersInfoController.php",                    
+                    "columns": [
+						{ "data": "firstName" },
+						{ "data": "lastName" },
+						{ "data": "countryCode" },
+						{ "data": "mobileNumber" },
+						{ "data": "endUser" },
+						{ "data": "email" }
                     ]
                 })
             }

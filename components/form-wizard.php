@@ -175,7 +175,7 @@
                         <div v-show="currentTab === 2">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h4 class="info-text"> Result as per your requirement!!</h4>
+                                    <h4 class="info-text"> Result as per your requirement.</h4>
                                 </div>
                                 <div class="col-md-12">
                                     <h5 class="result-text"> {{finalModelNum}}</h5>
@@ -603,7 +603,7 @@
                 $this.refreshAnimation()
                 $this.currentTab = 2
 				
-                var session_url = 'includes/DataController.php';
+                var session_url = 'includes/LogicController.php';
                 axios.post(session_url, {
                     customerData:formData
                 }).then(function(response) {
