@@ -17,6 +17,9 @@
                     </div>
                     <div class="content">
                         <div v-show="currentTab === 0" class="row">
+                            <div class="col-md-12">
+                                <h4 class="info-text"> Let's start with the basic details.</h4>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="solution">Solution</label>
@@ -63,6 +66,9 @@
                             </div>
                         </div>
                         <div v-show="currentTab === 1">
+                            <div class="col-md-12">
+                                <h4 class="info-text"> Now fill the technical requirements for your application.</h4>
+                            </div>
                             <div v-if="formData.CA.type == 'Exhaust' && formData.CA.value == 'Commercial Kitchen'">
                                 <div class="row">                                    
                                     <div class="col-md-6">
@@ -167,7 +173,14 @@
                             </div>
                         </div>
                         <div v-show="currentTab === 2">
-
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="info-text"> Result as per your requirement!!</h4>
+                                </div>
+                                <div class="col-md-12">
+                                    <h5 class="result-text"> {{finalModelNum}}</h5>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="actions">
@@ -328,7 +341,8 @@
                     flowEA:'',
                     numHoods:'',
                     lenExDuct:''
-                }
+                },
+                finalModelNum:''
             };  
         },
         computed: {
@@ -593,7 +607,7 @@
                 axios.post(session_url, {
                     customerData:formData
                 }).then(function(response) {
-					$this.errorMsg = response.data;					
+                    $this.finalModelNum = response.data;
                 }).catch(function(error) {
                     console.log(error);
                 });    
@@ -622,10 +636,11 @@
             }
         },
         mounted() {     
-            this.refreshAnimation()               
+            this.refreshAnimation()  
         },
         created(){
-            
-        }  
+        },
+        updated(){
+        }
     })
 </script>

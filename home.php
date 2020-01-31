@@ -1,5 +1,5 @@
 <?php
-    $v = '?v1.3';
+    $v = '?v1.4';
 	
 	if (session_status() == PHP_SESSION_NONE) 
 	{
@@ -17,12 +17,14 @@
     <head>
         <script type="text/javascript" src="assets/js/vue.js"></script>
         <script type="text/javascript" src="assets/js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="assets/js/datatables.min.js"></script>
         <script type="text/javascript" src="assets/js/bootstrap.bundle.min.js"></script>
         <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="assets/js/bootstrap-select.min.js"></script>
         <script type="text/javascript" src="assets/js/axios.min.js"></script>
         <script type="text/javascript" src="assets/js/global.js<?php echo $v; ?>"></script>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/datatables.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-select.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/font-awesome-4.7.0/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="assets/css/main.css<?php echo $v; ?>">

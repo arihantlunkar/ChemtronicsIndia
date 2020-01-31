@@ -71,7 +71,7 @@ var mainPage = new Vue({
         },
     },
     created() {
-        this.currentUrl = location.hash.replace(/^#/, '');        
+        this.currentUrl = location.hash.replace(/^#/, ''); 
     },
     mounted() {
         var $this = this
