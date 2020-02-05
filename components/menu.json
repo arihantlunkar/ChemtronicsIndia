@@ -12,12 +12,8 @@
                 {
                     "list": [
                         {
-                            "name": "Users Info",
+                            "name": "Registered User",
                             "link": "#ajax/users-info.php"
-                        },
-                        {
-                            "name": "User Form Data",
-                            "link": "#ajax/"
                         }
                     ]
                 }

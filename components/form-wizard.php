@@ -261,22 +261,22 @@
                             id:'commercialKitchen',
                             text: 'Commercial Kitchen',
                         },
-                        {
-                            id:'stp',
-                            text: 'STP',
-                        },
-                        {
-                            id:'owc',
-                            text: 'OWC',
-                        },
-                        {
-                            id:'garbageRoom',
-                            text: 'Garbage Room',
-                        },
-                        {
-                            id:'wasteSegregationRoom',
-                            text: 'Waste Segregation Room',
-                        }
+                        // {
+                        //     id:'stp',
+                        //     text: 'STP',
+                        // },
+                        // {
+                        //     id:'owc',
+                        //     text: 'OWC',
+                        // },
+                        // {
+                        //     id:'garbageRoom',
+                        //     text: 'Garbage Room',
+                        // },
+                        // {
+                        //     id:'wasteSegregationRoom',
+                        //     text: 'Waste Segregation Room',
+                        // }
                     ]
                 }, 
                 CAValue:'Commercial Kitchen',

@@ -21,7 +21,7 @@
                 <li class="nav-item dropdown">
                     <span class="d-inline-block font-weight-semibold hidden-xs">Welcome! <?php echo $_SESSION['username'];?></span>
                     <a class="nav-link dropdown-toggle d-inline-block pt-0 pb-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle profile-img">
+                        <img src="./assets/img/img_avatar.png" width="40" height="40" class="rounded-circle profile-img">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right pullDown" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="includes/SessionController.php?session=logout"><i class="fa fa-sign-out mr-2" aria-hidden="true"></i> Log Out</a>
@@ -55,7 +55,7 @@
             },
             getMenu:function(){
                 let $this = this
-                fetch('components/menu.json?v1.1')
+                fetch('components/menu.json?v1.4')
                 .then((res) => {
                     return res.json();
                 }).then((myJson) => {
