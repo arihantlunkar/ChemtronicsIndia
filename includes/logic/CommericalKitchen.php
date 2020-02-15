@@ -139,7 +139,7 @@ class CommericalKitchen extends Application implements ApplicationInterface
 	
 	public function printModelNo()
 	{		
-		return $this->fMF != -1 ? $this->strModelNo : "Treatment Time Is Not Sufficient, contact Solution provider.";
+		return $this->fMF != -1 ? $this->strModelNo : "Treatment time is not sufficient, you may have to increase exhaust duct length or reduce exhaust air velocity by increasing exhaust duct cross section area or both. Click Here for “Design Criteria” for best results. You can also contact solution provider on solution@chemtronicsindia.com";
 	}
 }
 

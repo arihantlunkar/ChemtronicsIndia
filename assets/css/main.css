@@ -103,6 +103,8 @@
 .card.form-wizard .card-body .steps .list-inline>li a.active{
     font-weight:700
 }
+.card.form-control:disabled, .form-control[readonly]{background-color: #fff;}
+.card.form-wizard .card-body .text-warning{color: #FF7F00 !important;font-weight:500}
 .moving-tab {
     background-image: linear-gradient(to right, #02b389, #19caa0 );
     box-shadow: 0 16px 26px -10px rgba(76, 175, 80, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(76, 175, 80, 0.2);
