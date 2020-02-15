@@ -171,6 +171,10 @@
 				{
 					return ["Flow value cannot exceed 5 digits", 1];
 				}
+				else if (flowEA.includes("."))
+				{
+					return ["Flow value cannot have decimal point", 1];
+				}
 				else if(flowEA.length < 1)
 				{
 					return ["Flow value cannot be less than 1 digits",1];

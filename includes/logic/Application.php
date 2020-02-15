@@ -2,11 +2,11 @@
 
 abstract class Application
 {
-	protected $tCalculationData;
+	public $tCalculationData;
 	
-	protected $strModelNo;
+	public $strModelNo;
 	
-	protected $fMF;
+	public $fMF;
 	
 	public function __construct($tCalculationData)
     {
@@ -17,9 +17,9 @@ abstract class Application
 		$this->runFormula();
     }
 	
-	abstract public function printModelNo();
-	
 	abstract public function runFormula();
+	
+	abstract public function calculateMultiplicationFactor($fCT); 	
 }
 
 ?>

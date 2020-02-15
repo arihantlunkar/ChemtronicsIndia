@@ -7,3 +7,4 @@ define('DB_NAME', 'chemtronics_india');
 
 define('FROM_EMAIL_ADDRESS', 'arihantlunkar1993@gmail.com');
 define('VERIFICATION_LINK', 'http://localhost/ChemtronicsIndia/index.php');
+define('HTTP_REFERER', 'localhost');

@@ -176,17 +176,17 @@
                 var a,h,f
                 if($this.owcRA && $this.owcRH && $this.flowEA){
                     if($this.owcRAUnitVal=="ft2"){
-                        a = $this.owcRA * 10.764
+                        a = $this.owcRA * 0.09290304
                     }else{
                         a = $this.owcRA
                     }
                     if($this.owcRHUnitVal=="ft"){
-                        h = $this.owcRH * 3.281
+                        h = $this.owcRH * 0.3048
                     }else{
                         h = $this.owcRH
                     }
-                    if($this.flowEAUnitVal=="cmh"){
-                        f = $this.flowEA * 1.7
+                    if($this.flowEAUnitVal=="cfm"){
+                        f = $this.flowEA * 1.699
                     }else{
                         f = $this.flowEA
                     }
@@ -204,7 +204,7 @@
                 var a,x
                 if($this.owcRA && $this.numOWC){
                     if($this.owcRAUnitVal=="ft2"){
-                        a = $this.owcRA * 10.764
+                        a = $this.owcRA * 0.09290304
                     }else{
                         a = $this.owcRA
                     }

@@ -48,6 +48,10 @@ class Login extends DBController implements SessionInterface
 					{
 						session_start();
 					}
+					if(isset($row['isAdmin']) && $row['isAdmin'] == 1)
+					{
+						$_SESSION['isAdmin'] = $row['isAdmin'];
+					}
 					
 					$_SESSION['email'] = $row['email'];
 					$_SESSION['username'] = $row['firstName']." ".$row['lastName'];

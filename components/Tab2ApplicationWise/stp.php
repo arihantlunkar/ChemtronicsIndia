@@ -159,17 +159,17 @@
                 var a,h,f
                 if($this.stpRA && $this.stpRH && $this.flowEA){
                     if($this.stpRAUnitVal=="ft2"){
-                        a = $this.stpRA * 10.764
+                        a = $this.stpRA * 0.09290304
                     }else{
                         a = $this.stpRA
                     }
                     if($this.stpRHUnitVal=="ft"){
-                        h = $this.stpRH * 3.281
+                        h = $this.stpRH * 0.3048
                     }else{
                         h = $this.stpRH
                     }
-                    if($this.flowEAUnitVal=="cmh"){
-                        f = $this.flowEA * 1.7
+                    if($this.flowEAUnitVal=="cfm"){
+                        f = $this.flowEA * 1.699
                     }else{
                         f = $this.flowEA
                     }

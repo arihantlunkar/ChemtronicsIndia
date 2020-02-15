@@ -1,5 +1,7 @@
 <?php
 require_once 'CommericalKitchen.php';
+require_once 'STP.php';
+require_once 'OWC.php';
 
 class ApplicationCreator
 {	
@@ -29,9 +31,20 @@ class ApplicationCreator
 	{			
 		$objApplication = null;
 		
-		if(strcasecmp($this->strSolution, "Air") == 0 && strcasecmp($this->strType, "Exhaust") == 0 && strcasecmp($this->strApplication, "Commercial Kitchen") == 0)
+		if(strcasecmp($this->strSolution, "Air") == 0 && strcasecmp($this->strType, "Exhaust") == 0)
 		{
-			$objApplication = new CommericalKitchen($this->jCalculationData);
+			if(strcasecmp($this->strApplication, "Commercial Kitchen") == 0)
+			{
+				$objApplication = new CommericalKitchen($this->jCalculationData);
+			}
+			else if(strcasecmp($this->strApplication, "STP") == 0)
+			{
+				$objApplication = new STP($this->jCalculationData);
+			}
+			else if(strcasecmp($this->strApplication, "OWC") == 0)
+			{
+				$objApplication = new OWC($this->jCalculationData);
+			}
 		}
 		else
 		{
