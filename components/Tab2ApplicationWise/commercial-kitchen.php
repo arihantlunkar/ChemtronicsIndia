@@ -157,7 +157,7 @@
                 }
             },                        
             validateFlowEA:function(flowEA,optional){
-                var flowEARegx = /^[0-9]*$/gm;
+                var flowEARegx = /^[0-9]*$/g;
                 var $this = this
 				if(flowEA == "" && optional == 1)
 				{
@@ -171,17 +171,13 @@
 				{
 					return ["Flow value cannot exceed 5 digits", 1];
 				}
-				else if (flowEA.includes("."))
-				{
-					return ["Flow value cannot have decimal point", 1];
-				}
 				else if(flowEA.length < 1)
 				{
 					return ["Flow value cannot be less than 1 digits",1];
                 }
-                else if(!flowEARegx.test(flowEA) && flowEA.length > 5)
+                else if(!flowEARegx.test(flowEA) || flowEA.length > 5)
 				{
-                    return ["Invalid flow value, ",1];
+                    return ["Invalid flow value ",1];
 				}
 				else
 				{
@@ -286,7 +282,17 @@
                         typeCookingVal:$this.typeCookingVal
                     }
                 }  
-                $this.$emit('calculationdata', tab1Data)
+                var array = Object.values($this.errorMsgIndividual)
+                var boolean = array.some(function(e){
+                    if(e!=''){
+                        return e
+                    }
+                })
+                if(boolean){
+                    $this.$emit('calculationdata', {})
+                }else{
+                    $this.$emit('calculationdata', tab1Data)
+                }                
             }
         },
         updated: function() {

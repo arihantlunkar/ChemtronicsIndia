@@ -10,7 +10,7 @@
                 <p class="card-text">This software helps you selecting suitable model for treatment of Air, Water & Waste water for diversified Industries & Applications.</p>
             </div>
             <div class="card-footer text-muted">
-                V1.1
+                V1.2
             </div>
         </div>
     </div>

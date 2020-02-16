@@ -1,5 +1,5 @@
 <?php
-    $v = '?v1.4';
+    $v = '?v1.5';
 	
 	if (session_status() == PHP_SESSION_NONE) 
 	{
@@ -10,7 +10,7 @@
 	{
 		header('Location: index.php');
 		exit(0);
-	}
+    }
 ?>
 <!DOCTYPE html>
 <html>

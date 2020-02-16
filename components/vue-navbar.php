@@ -1,7 +1,13 @@
+<?php
+    if (session_status() == PHP_SESSION_NONE) 
+    {
+        session_start();
+    }
+?>
 <template id="vueNavbar">
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="#">
-            <img src="./assets/img/chemtronics-logo.gif" width="175"  class="d-inline-block align-bottom" alt=""> PROSOFT V1.1
+            <img src="./assets/img/chemtronics-logo.gif" width="175"  class="d-inline-block align-bottom" alt=""> PROSOFT V1.2
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -28,7 +34,7 @@
                     </div>
                 </li>   
             </ul>
-        </div>        
+        </div>
     </nav>
 </template>
 <script>
@@ -36,7 +42,8 @@
         template: '#vueNavbar',
         data: function () {
             return {
-                navbarMenu: {}
+                navbarMenu: {},
+                isAdmin:''
             };  
         },
         computed:{
@@ -55,11 +62,17 @@
             },
             getMenu:function(){
                 let $this = this
-                fetch('components/menu.json?v1.4')
+                fetch('components/menu.json?v1.5')
                 .then((res) => {
                     return res.json();
                 }).then((myJson) => {
-                    $this.navbarMenu = myJson.mainMenu
+                    var data = myJson.mainMenu
+                    if($this.isAdmin == "1"){                        
+                        $this.navbarMenu = data
+                    }else{
+                        const result = data.filter(({name}) => !name.includes('Reports'))
+                        $this.navbarMenu = result
+                    }
                 });
             },
             getActiveClass:function(v){
@@ -90,7 +103,9 @@
         
         },
         created(){
+            var $this = this
             this.getMenu()
+            $this.isAdmin = "<?php echo  $_SESSION['isAdmin']; ?>"; 
         }  
     })
 </script>

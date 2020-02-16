@@ -90,7 +90,34 @@
                                     <h4 class="info-text"> Result as per your requirement.</h4>
                                 </div>
                                 <div class="col-md-12">
-                                    <h5 class="result-text"> {{finalModelNum}}</h5>
+                                    <div class="row">
+                                        <template v-if="!finalModelNum">
+                                            <div class="col-md-12 my-auto">
+                                                <div v-if="finalRiskMsg0" class="alert alert-warning">{{finalRiskMsg0}}
+                                                    <a href="https://www.slideshare.net/chemtronics/design-criteria-exhaust-air-odour-destruction-228236924" target="_blank" class="text-primary">"Design Criteria"</a> 
+                                                {{finalRiskMsg1}} 
+                                                    <a href="mailto:solution@chemtronicsindia.com" target="_blank" class="text-primary">solution@chemtronicsindia.com</a>
+                                                </div>
+                                                <div v-if="finalNoModelMsg" class="alert alert-danger">{{finalNoModelMsg}}</div>
+                                            </div> 
+                                        </template>  
+                                        <template v-if="finalModelNum">                                     
+                                            <div class="col-md-12 my-auto">
+                                                <div class="col-md-12 mb-4 pl-0">
+                                                    <div class="alert alert-success">{{finalModelNum}}</div> 
+                                                    <p><i class="fa fa-info-circle mr-1"></i> Our above model number is as per your technical requirement for <span class="text-primary">{{formData.CA.value}}</span> application under <span class="text-primary">{{formData.CS}}</span> solution of <span class="text-primary">{{formData.CA.type}}</span> type.</p>
+                                                </div>
+                                                <!-- <div class="col-md-12 pl-0">
+                                                    <h6>Download your technical requirements</h6>
+                                                    <a href="#" class="btn btn-transparent">Download Now</a>
+                                                </div> -->
+                                            </div>
+                                            <!-- <div class="col-md-4 p-4 border-left">
+                                                <a href="#" class="btn btn-primary btn-block">Download PDF</a>
+                                                <a href="#" class="btn btn-transparent btn-block">Sent Email</a>
+                                            </div> -->
+                                        </template>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -235,7 +262,10 @@
                 CPValue:[],
                 COPValue:'',
                 errorMsg:'',                
-                finalModelNum:''
+                finalModelNum:'',
+                finalRiskMsg0:'',
+                finalRiskMsg1:'',
+                finalNoModelMsg:''
             };  
         },
         computed: {
@@ -347,7 +377,30 @@
                 axios.post(session_url, {
                     customerData:formData
                 }).then(function(response) {
-                    $this.finalModelNum = response.data;
+                    var str = response.data
+                    var riskMsg = str.includes("Treatment time is not sufficient");
+                    var noModelMsg = str.includes("No Model Found");
+                    var ModelMsg = str.includes("Model number is");
+                    if(riskMsg){
+                        var x = str.split("“Design Criteria”");
+                        var y = x[1].split("solution@chemtronicsindia.com");
+                        $this.finalRiskMsg0 = x[0]
+                        $this.finalRiskMsg1 = y[0]
+                        $this.finalModelNum = ''
+                        $this.finalNoModelMsg = ''
+                    }
+                    if(noModelMsg){
+                        $this.finalNoModelMsg = response.data
+                        $this.finalModelNum = '';
+                        $this.finalRiskMsg0 = '';
+                        $this.finalRiskMsg1 = '';
+                    }
+                    if(ModelMsg){
+                        $this.finalModelNum = response.data;
+                        $this.finalNoModelMsg = ''
+                        $this.finalRiskMsg0 = '';
+                        $this.finalRiskMsg1 = '';
+                    }
                 }).catch(function(error) {
                     console.log(error);
                 });    

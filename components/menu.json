@@ -13,7 +13,7 @@
                     "list": [
                         {
                             "name": "Registered User",
-                            "link": "#ajax/users-info.php"
+                            "link": "#ajax/registered-user.php"
                         }
                     ]
                 }

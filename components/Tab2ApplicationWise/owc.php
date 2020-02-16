@@ -208,7 +208,7 @@
                     }else{
                         a = $this.owcRA
                     }
-                    x = $this.numOWC * 125
+                    x = $this.numOWC * 50
                     if(a<x){
                         $this.owcRAInfo = "Area for per OWC is not sufficient"
                     }else if(a>=x){
@@ -359,7 +359,7 @@
 				{
 					return ["Flow value cannot be less than 1 digits",1];
                 }
-                else if(!flowEARegx.test(flowEA) && flowEA.length > 5)
+                else if(!flowEARegx.test(flowEA) || flowEA.length > 5)
 				{
                     return ["Invalid flow value, ",1];
 				}
@@ -445,7 +445,17 @@
                         acph:$this.acph
                     }
                 }  
-                $this.$emit('calculationdata', tab1Data)
+                var array = Object.values($this.errorMsgIndividual)
+                var boolean = array.some(function(e){
+                    if(e!=''){
+                        return e
+                    }
+                })
+                if(boolean){
+                    $this.$emit('calculationdata', {})
+                }else{
+                    $this.$emit('calculationdata', tab1Data)
+                }
             }
         },
         updated: function() {

@@ -14,6 +14,7 @@ class Logout implements SessionInterface
 		
 		unset($_SESSION['username']);
 		unset($_SESSION['email']);
+		unset($_SESSION['isAdmin']);
 		
 		header("Location: ../index.php");
 		exit(0);
