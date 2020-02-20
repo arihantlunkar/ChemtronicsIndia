@@ -84,7 +84,7 @@
                                 <owc  @calculationdata="owcData"></owc>                                
                             </div>
                         </div>
-                        <div v-show="currentTab === 2">
+                        <div v-show="currentTab === 2" :class="{loadingDiv:loading}" class="loading-cus-ht">
                             <div class="row">
                                 <div class="col-md-12">
                                     <h4 class="info-text"> Result as per your requirement.</h4>
@@ -143,6 +143,7 @@
         template: '#formWizard',
         data: function () {
             return {
+                loading:false,
                 currentTab: 0,
                 tabs: ['Basic Details', 'Calculations', 'Model Number'],
                 solution : [
@@ -372,11 +373,13 @@
             submitForm:function(formData){
                 var $this = this
                 $this.refreshAnimation()
-                $this.currentTab = 2				
+                $this.currentTab = 2
+                $this.loading = true				
                 var session_url = 'includes/LogicController.php';
                 axios.post(session_url, {
                     customerData:formData
                 }).then(function(response) {
+                    $this.loading = false
                     var str = response.data
                     var riskMsg = str.includes("Treatment time is not sufficient");
                     var noModelMsg = str.includes("No Model Found");

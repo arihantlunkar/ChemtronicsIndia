@@ -1,134 +1,34 @@
-.navbar{
-    box-shadow: 0 4px 20px 0 rgba(0,0,0,.05);
-    padding: .8rem 2.2rem;
-    background: rgb(255, 255, 255);
-}
-.navbar-brand{
-    font-weight: bold;
-    font-size: 0.75rem;
-}
-.navbar .nav-item.pages{
-    border-radius: 4px;
-    margin-right: .5rem!important;
-}
-.navbar .nav-item.pages:hover{
-    background-color: #f6f6f6;
-
-}
-.navbar .nav-item.pages.active{
-    background-image: linear-gradient(to right, #02b389, #19caa0 );
-}
-.navbar .nav-item.pages.active{
-    box-shadow: 0 0 6px 1px rgb(25, 202, 160, 0.2);
-}
-.navbar .nav-item.pages.active a{
-    color: #fff;
-}
-.navbar .nav-item.pages .nav-link{
-    padding: .5rem 1.2rem !important;
-}
-.navbar .dropdown-menu{
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,.14)!important;
-    min-width: 215px;
-    margin-top: 1rem;
-    border: none;
-}
-.navbar .dropdown-menu a{
-    font-size: 14px;
-    color: #626262 !important;
-}
-.navbar .navbar-right .profile-img{
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,.12),0 2px 4px 0 rgba(0,0,0,.08)!important;
-}
-.navbar .navbar-right .dropdown-toggle::after{
-    display: none;
-}
-.card{
-    border:none;
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
-}
-.card.welcome-msg .card-header{
-    padding: 2rem 2rem 1.4rem;
-    color: #fff;
-    background-image: linear-gradient(to right,rgba(2, 177, 136, 0.6), rgba(25, 202, 160, 0.8)), url(../img/welcomeMsgBg.jpg);
-}
-.card.welcome-msg .card-header h4{
-    font-size: 22px;  
-    font-weight: 600;  
-}
-.card.welcome-msg .card-header h5{
-    font-size: 18px;
-}
-.card.form-wizard .card-header{
-    background: #fff;
-    padding: 2rem 2rem 1.4rem;
-    text-align: center;
-    border-bottom: none;
-}
-.card.form-wizard .card-header h4{
-    font-size: 24px;  
-    font-weight: 700; 
-}
-.card.form-wizard .card-header h5{
-    font-size: 16px;  
-    font-weight: 300; 
-}
-.card.form-wizard .card-body{
-    padding: 0;
-}
-.card.form-wizard .card-body .content, .card.form-wizard .card-body .actions{
-    padding: 1.25rem;
-}
-.card.form-wizard .card-body .content .info-text{
-    text-align: center;
-    font-weight: 300;
-    margin: 0px 0 40px;
-    font-size: 16px;
-    line-height: 18px;
-}
-.card.form-wizard .card-body .steps .list-inline{
-    background-color: rgba(200, 200, 200, 0.2);
-}
-.card.form-wizard .card-body .steps .list-inline>li{
-    text-align: center;
-    width: 33%;
-    margin-right: 0;
-}
-.card.form-wizard .card-body .steps .list-inline>li a{
-    text-transform: uppercase;    
-    padding: 9px 15px;
-    position: relative;
-    display: block;
-}
-.card.form-wizard .card-body .steps .list-inline>li a.active{
-    font-weight:700
-}
-.card.form-control:disabled, .form-control[readonly]{background-color: #fff;}
-.card.form-wizard .card-body .text-primary{color:#02b389 !important; font-weight: 500;}
-.moving-tab {
-    background-image: linear-gradient(to right, #02b389, #19caa0 );
-    box-shadow: 0 16px 26px -10px rgba(76, 175, 80, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(76, 175, 80, 0.2);
-    position: absolute;
-    text-align: center;
-    padding: .5rem 3.2rem !important;
-    font-size: 14px;
-    text-transform: uppercase;
-    -webkit-font-smoothing: subpixel-antialiased;
-    top: 118px;
-    left: 0px;
-    border-radius: 4px;
-    color: #FFFFFF;
-    cursor: pointer;
-    font-weight: 500;
-}
-@media only screen and (max-width: 1167px) {
-    .moving-tab{
-        display: none !important;
-    }
-}
-.table-bordered{
-    border: 2px solid #f8f8f8;
-}
-.table-bordered td, .table-bordered th, .table thead th {
-    border: none;
-}
+.navbar{box-shadow:0 4px 20px 0 rgba(0,0,0,.05);padding:.8rem 2.2rem;background:#fff}
+.navbar-brand{font-weight:700;font-size:.75rem}
+.navbar .nav-item.pages{border-radius:4px;margin-right:.5rem!important}
+.navbar .nav-item.pages:hover{background-color:#f6f6f6}
+.navbar .nav-item.pages.active{background-image:linear-gradient(to right,#02b389,#19caa0);box-shadow:0 0 6px 1px rgb(25,202,160,.2)}
+.navbar .nav-item.pages.active a{color:#fff}
+.navbar .nav-item.pages .nav-link{padding:.5rem 1.2rem!important}
+.navbar .dropdown-menu{box-shadow:0 2px 8px 0 rgba(0,0,0,.14)!important;min-width:215px;margin-top:1rem;border:none}
+.navbar .dropdown-menu a{font-size:14px;color:#626262!important}
+.navbar .navbar-right .profile-img{box-shadow:0 4px 8px 0 rgba(0,0,0,.12),0 2px 4px 0 rgba(0,0,0,.08)!important}
+.navbar .navbar-right .dropdown-toggle::after{display:none}
+.card{border:none;box-shadow:0 .25rem .75rem rgba(0,0,0,.05)}
+.card.welcome-msg .card-header{padding:2rem 2rem 1.4rem;color:#fff;background-image:linear-gradient(to right,rgba(2,177,136,.6),rgba(25,202,160,.8)),url(../img/welcomeMsgBg.jpg)}
+.card.welcome-msg .card-header h4{font-size:22px;font-weight:600}
+.card.welcome-msg .card-header h5{font-size:18px}
+.card.welcome-msg .card-footer .main-website,.card.welcome-msg .card-footer .solution-name{font-weight:500}
+.card.welcome-msg .card-footer .main-website{color:#02b389}
+.card.form-wizard .card-header{background:#fff;padding:2rem 2rem 1.4rem;text-align:center;border-bottom:none}
+.card.form-wizard .card-header h4{font-size:24px;font-weight:700}
+.card.form-wizard .card-header h5{font-size:16px;font-weight:300}
+.card.form-wizard .card-body{padding:0}
+.card.form-wizard .card-body .actions,.card.form-wizard .card-body .content{padding:1.25rem}
+.card.form-wizard .card-body .content .info-text{text-align:center;font-weight:300;margin:0 0 40px;font-size:16px;line-height:18px}
+.card.form-wizard .card-body .steps .list-inline{background-color:rgba(200,200,200,.2)}
+.card.form-wizard .card-body .steps .list-inline>li{text-align:center;width:33%;margin-right:0}
+.card.form-wizard .card-body .steps .list-inline>li a{text-transform:uppercase;padding:9px 15px;position:relative;display:block}
+.card.form-wizard .card-body .steps .list-inline>li a.active{font-weight:700}
+.card.form-control:disabled,.form-control[readonly]{background-color:#fff}
+.card.form-wizard .card-body .text-primary{color:#02b389!important;font-weight:500}
+.card.form-wizard .loadingDiv.loading-cus-ht{height:125px}
+.moving-tab{background-image:linear-gradient(to right,#02b389,#19caa0);box-shadow:0 16px 26px -10px rgba(76,175,80,.56),0 4px 25px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(76,175,80,.2);position:absolute;text-align:center;padding:.5rem 3.2rem!important;font-size:14px;text-transform:uppercase;-webkit-font-smoothing:subpixel-antialiased;top:118px;left:0;border-radius:4px;color:#FFF;cursor:pointer;font-weight:500}
+@media only screen and (max-width:1167px){.moving-tab{display:none!important}}
+.table-bordered{border:2px solid #f8f8f8}
+.table thead th,.table-bordered td,.table-bordered th{border:none}

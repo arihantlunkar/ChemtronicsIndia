@@ -1,30 +1,9 @@
-.card{
-    border:none;
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
-    max-width: 350px;
-    width: 95%;
-    font-size: 12px;
-}
-.card.extra-width{
-    max-width: 650px;
-}
-.card .card-header{
-    background: #fff;
-    padding: 1.4rem 2rem;
-    text-align: center;
-}
-.card label{
-    margin-bottom: .2rem;
-}
-.loadingDiv .card-body, .loadingDiv .card-footer{
-    opacity: 0;
-    pointer-events: none;
-    cursor: auto;
-}
-.card .card-footer .footer-text span{
-    cursor: pointer;
-    color:#02b389
-}
+.card{border:none;box-shadow:0 .25rem .75rem rgba(0,0,0,.05);max-width:350px;width:95%;font-size:12px}
+.card.extra-width{max-width:650px}
+.card .card-header{background:#fff;padding:1.4rem 2rem;text-align:center}
+.card label{margin-bottom:.2rem}
+.loadingDiv .card-body,.loadingDiv .card-footer{opacity:0;pointer-events:none;cursor:auto}
+.card .card-footer .footer-text span{cursor:pointer;color:#02b389}
 input.form-control::placeholder{color:#f8f8f8;font-size:10px;font-style:italic;opacity:1}
 input::-webkit-input-placeholder{color:#f8f8f8;font-size:10px;font-style:italic;opacity:1}
 input::-moz-input-placeholder{color:#f8f8f8;font-size:10px;font-style:italic;opacity:1}
