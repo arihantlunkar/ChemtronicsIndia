@@ -21,12 +21,14 @@ var mainPage = new Vue({
     methods: {
         loadURL: function (url) {
             let $this = this 
+            $('#pageLoader').show(); 
             let container = $('#content');
             let fetchMethod = new Fetchmethod()
             let loadPage = fetchMethod.getUrl(url)
             loadPage.then((response) => {
                 $this.currentPage = ''
                 container.html('')
+                $('#pageLoader').hide();
                 container.html(response.data)
             })
             .then(r => {
@@ -37,7 +39,8 @@ var mainPage = new Vue({
             });
         },
         afterPageLoad: function (url) {
-            let $this = this            
+            let $this = this   
+            $('#pageLoader').hide();         
             if (url){
                 let urlwithparameter = url.split('?')
                 let pageName = urlwithparameter[0].replace('ajax/', '').replace('.php', '')

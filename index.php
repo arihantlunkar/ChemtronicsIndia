@@ -1,5 +1,5 @@
 <?php
-    $v = '?v1.6';
+    $v = '?v1.7';
 	
 	require_once 'includes/session/VerifyToken.php';
 	

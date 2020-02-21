@@ -2,6 +2,7 @@ body{background:#f8f8f8;color:#626262;font-size:14px;font-family:Montserrat,Helv
 .container-fluid{padding-right:40px;padding-left:40px}
 .font-weight-semibold{font-weight:600!important}
 .loadingDiv{background:url(../img/loading.svg) center center/40px auto no-repeat #fff}
+.loadingDiv>*{opacity: 0 !important;visibility:hidden;}
 .btn.dropdown-toggle{background-color:transparent;border:1px solid #ced4da!important;font-size:14px}
 .btn-light:not(:disabled):not(.disabled).active,.btn-light:not(:disabled):not(.disabled):active,.show>.btn-light.dropdown-toggle{background-color:transparent!important}
 .btn-primary{box-shadow:0 0 6px 1px rgba(25,202,160,.2);background-image:linear-gradient(to right,#02b389,#19caa0);border:none;border-radius:4px;font-size:14px;text-transform:uppercase;min-width:160px}
@@ -25,3 +26,5 @@ input::-ms-input-placeholder{color:silver;font-size:10px;font-style:italic;opaci
 .dropdown-item.active,.dropdown-item:active{background-image:linear-gradient(to right,#02b389,#19caa0)}
 .dropdown-item.disabled,.dropdown-item:disabled{color:#b5b5b5;background-color:#ececec}
 .bootstrap-select .dropdown-menu li a{font-size:14px}
+.mt-7{margin-top: 7rem !important;}
+.page-loader{text-align: center;opacity: 1;display: none;position: fixed;top: 50%;width: 100%;height: 100%;}

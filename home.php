@@ -1,5 +1,5 @@
 <?php
-    $v = '?v1.6';
+    $v = '?v1.7';
 	
 	if (session_status() == PHP_SESSION_NONE) 
 	{
@@ -35,8 +35,11 @@
         require_once 'components/vue-navbar.php';
         //require_once 'components/vue-footer.php';
     ?>   
-    <body>      
-        <div id="mainPage">
+    <body>
+        <div id="pageLoader" class="page-loader">
+            <img src="./assets/img/loading.svg">
+        </div>      
+        <div id="mainPage" class="mt-7">
             <vue-navbar></vue-navbar>
             <component :is="currentTemplate" v-if="currentTemplate"></component>
             <!-- <vue-footer></vue-footer> -->
