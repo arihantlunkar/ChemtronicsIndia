@@ -114,7 +114,7 @@
                                             </div>
                                             <div class="col-md-4 p-4 border-left">
                                                 <a href="#" class="btn btn-primary btn-block" @click="downloadBOQ">Download BOQ</a>
-                                                <a href="#" class="btn btn-transparent btn-block">Sent Email</a>
+                                                <a href="#" class="btn btn-transparent btn-block">Send Email</a>
                                             </div>
                                         </template>
                                     </div>
@@ -305,7 +305,8 @@
                     CA: this.CA,
                     purpose: this.purpose,
                     otherPurpose: this.otherPurpose,
-                    calculationData: {}                  
+                    calculationData: {},
+                    finalModelNum : ''            
                 }
             },
             updatedCurrentTab(){
@@ -409,6 +410,9 @@
                     }
                     if(ModelMsg){
                         $this.finalModelNum = response.data;
+                        var str = response.data
+                        var x = str.split("Model number is : ");
+                        $this.formData.finalModelNum = x[1];
                         $this.finalNoModelMsg = ''
                         $this.finalRiskMsg0 = '';
                         $this.finalRiskMsg1 = '';
@@ -452,15 +456,24 @@
             },
             downloadBOQ:function(e){
                 var $this = this
-                console.log($this.formData)
-                // var session_url = 'includes/LogicController.php';
-                // axios.post(session_url, {
-                //     customerData:formData
-                // }).then(function(response) {
-                    
-                // }).catch(function(error) {
-                //     console.log(error);
-                // });
+                var session_url = 'includes/DownloadFileController.php';
+                axios.post(session_url, {
+                    customerData:$this.formData
+                }).then(function(response) {
+					if(response.data != "")
+					{
+						var a = document.createElement('a');
+						var url = response.data;
+						a.href = url;
+						a.download = $this.formData.finalModelNum + ".pdf";
+						document.body.append(a);
+						a.click();
+						a.remove();
+						window.URL.revokeObjectURL(url);
+					}                    
+                }).catch(function(error) {
+                    console.log(error);
+                });
                 e.preventDefault(); 
             }
         },
