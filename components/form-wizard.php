@@ -102,20 +102,20 @@
                                             </div> 
                                         </template>  
                                         <template v-if="finalModelNum">                                     
-                                            <div class="col-md-12 my-auto">
+                                            <div class="col-md-8 my-auto">
                                                 <div class="col-md-12 mb-4 pl-0">
                                                     <div class="alert alert-success">{{finalModelNum}}</div> 
                                                     <p><i class="fa fa-info-circle mr-1"></i> Our above model number is as per your technical requirement for <span class="text-primary">{{formData.CA.value}}</span> application under <span class="text-primary">{{formData.CS}}</span> solution of <span class="text-primary">{{formData.CA.type}}</span> type.</p>
                                                 </div>
-                                                <!-- <div class="col-md-12 pl-0">
+                                                <div class="col-md-12 pl-0">
                                                     <h6>Download your technical requirements</h6>
-                                                    <a href="#" class="btn btn-transparent">Download Now</a>
-                                                </div> -->
+                                                    <a href="#" class="btn btn-transparent" @click="downloadTechReq">Download Now</a>
+                                                </div>
                                             </div>
-                                            <!-- <div class="col-md-4 p-4 border-left">
-                                                <a href="#" class="btn btn-primary btn-block">Download PDF</a>
+                                            <div class="col-md-4 p-4 border-left">
+                                                <a href="#" class="btn btn-primary btn-block" @click="downloadBOQ">Download BOQ</a>
                                                 <a href="#" class="btn btn-transparent btn-block">Sent Email</a>
-                                            </div> -->
+                                            </div>
                                         </template>
                                     </div>
                                 </div>
@@ -135,6 +135,15 @@
                     </div>
                 </form>
             </div>
+        </div>
+        <div class="pdf-content" style="display:none">
+            <table>
+            <tr>
+                <th colspan="2">
+                    Filled technical requirement for<span>{{finalModelNum}}</span>
+                </th>
+            </tr>
+            </table>
         </div>
     </div>
 </template>
@@ -429,6 +438,30 @@
                         'transition': 'all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)'
                     });
                 }, 100);                
+            },
+            downloadTechReq:function(e){
+                var $this = this
+                var pdfData = $('.pdf-content').html()
+                var doc = new jsPDF('p', 'pt', 'a4', true)
+                doc.fromHTML(pdfData,2,2,{
+                    'width': 500
+                },function () {
+                    doc.save('try.pdf');
+                });
+                e.preventDefault();
+            },
+            downloadBOQ:function(e){
+                var $this = this
+                console.log($this.formData)
+                // var session_url = 'includes/LogicController.php';
+                // axios.post(session_url, {
+                //     customerData:formData
+                // }).then(function(response) {
+                    
+                // }).catch(function(error) {
+                //     console.log(error);
+                // });
+                e.preventDefault(); 
             }
         },
         mounted() {     
