@@ -32,3 +32,4 @@
 @media only screen and (max-width:1167px){.moving-tab{display:none!important}}
 .table-bordered{border:2px solid #f8f8f8}
 .table thead th,.table-bordered td,.table-bordered th{border:none}
+.pdf-content{display: none;}

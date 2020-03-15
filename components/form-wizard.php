@@ -2,6 +2,7 @@
     require_once 'Tab2ApplicationWise/commercial-kitchen.php';
     require_once 'Tab2ApplicationWise/stp.php';
     require_once 'Tab2ApplicationWise/owc.php';
+    require_once 'pdf-content.php';
 ?>
 <template id="formWizard">
     <div class="col-md-8">
@@ -114,7 +115,7 @@
                                             </div>
                                             <div class="col-md-4 p-4 border-left">
                                                 <a href="#" class="btn btn-primary btn-block" @click="downloadBOQ">Download BOQ</a>
-                                                <a href="#" class="btn btn-transparent btn-block">Sent Email</a>
+                                                <!-- <a href="#" class="btn btn-transparent btn-block">Sent Email</a> -->
                                             </div>
                                         </template>
                                     </div>
@@ -136,14 +137,8 @@
                 </form>
             </div>
         </div>
-        <div class="pdf-content" style="display:none">
-            <table>
-            <tr>
-                <th colspan="2">
-                    Filled technical requirement for<span>{{finalModelNum}}</span>
-                </th>
-            </tr>
-            </table>
+        <div class="pdf-content">
+            <pdf-content :formdata="formData" :finalmodelmum="finalModelNum" :purpose="purpose" :currenttab="currentTab"></pdf-content>
         </div>
     </div>
 </template>
@@ -441,26 +436,26 @@
             },
             downloadTechReq:function(e){
                 var $this = this
+                var ct = this.formData.CT      
+                var caVal = this.formData.CA.value
+                var ca = caVal.replace(/ +/g, "");          
                 var pdfData = $('.pdf-content').html()
                 var doc = new jsPDF('p', 'pt', 'a4', true)
-                doc.fromHTML(pdfData,2,2,{
-                    'width': 500
+                margins = {
+                    top: 60,
+                    bottom: 60,
+                    left: 40,
+                    width: 522
+                };
+                doc.fromHTML(pdfData,margins.left,margins.top,{
+                    'width': margins.width
                 },function () {
-                    doc.save('try.pdf');
-                });
+                    doc.save('UserTechReq-'+ct+'-'+ca+'.pdf');
+                },margins);
                 e.preventDefault();
             },
             downloadBOQ:function(e){
                 var $this = this
-                console.log($this.formData)
-                // var session_url = 'includes/LogicController.php';
-                // axios.post(session_url, {
-                //     customerData:formData
-                // }).then(function(response) {
-                    
-                // }).catch(function(error) {
-                //     console.log(error);
-                // });
                 e.preventDefault(); 
             }
         },
