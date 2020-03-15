@@ -460,6 +460,9 @@
             },
             downloadBOQ:function(e){
                 var $this = this
+                var ct = this.formData.CT      
+                var caVal = this.formData.CA.value
+                var ca = caVal.replace(/ +/g, ""); 
                 var session_url = 'includes/DownloadFileController.php';
                 axios.post(session_url, {
                     customerData:$this.formData
@@ -469,7 +472,7 @@
 						var a = document.createElement('a');
 						var url = response.data;
 						a.href = url;
-						a.download = $this.formData.finalModelNum + ".pdf";
+						a.download = ct+'-'+ca+'-'+$this.formData.finalModelNum + ".pdf";
 						document.body.append(a);
 						a.click();
 						a.remove();

@@ -1,6 +1,6 @@
 <template id="pdfContent">
     <div style="font-family:Montserrat,Helvetica,Arial,sans-serif;">
-        <h2 style="font-size:20px;">User Technical Requirement For <span style="color:#02b389">{{finalmodelmum}}</span></h2>
+        <h2 style="font-size:20px;">User Technical Requirement For <span style="color:#02b389">{{finalNum.value}}</span></h2>
         <div>
             <h4>Basic Details</h4>
             <p>Solution: <span>{{formdata.CS}}</span></p>
@@ -10,7 +10,7 @@
             <p v-if="purpose.value.includes('Other')">Other Purpose: <span>{{formdata.otherPurpose.value}}</span></p>
         </div>
         <div>
-            <h4>Technical requirements for your {{formdata.CA.value}} application under {{formdata.CS}} solution of {{formdata.CT}} type.</h4>
+            <h4>Technical requirements</h4>
             <div v-if="formdata.CA.type == 'Exhaust' && formdata.CA.value == 'Commercial Kitchen' && currenttab === 2">
                 <p>Flow of Exhaust Air* : <span>{{formdata.calculationData.req.flowEA}} {{formdata.calculationData.req.flowEAUnitVal}}</span></p>
                 <p>Number of Hoods : <span>{{formdata.calculationData.nonReq.numHoods}}</span></p>
@@ -46,6 +46,15 @@
         data: function () {
             return {
             };  
+        },
+        computed:{
+            finalNum(){
+                var str = this.finalmodelmum
+                var x = str.split("Model number is : ");
+                return{
+                    value:x[1]
+                }
+            }
         },
         methods:{
             
