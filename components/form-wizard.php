@@ -300,7 +300,8 @@
                     CA: this.CA,
                     purpose: this.purpose,
                     otherPurpose: this.otherPurpose,
-                    calculationData: {}                  
+                    calculationData: {},
+                    finalModelNum : ''            
                 }
             },
             updatedCurrentTab(){
@@ -404,6 +405,9 @@
                     }
                     if(ModelMsg){
                         $this.finalModelNum = response.data;
+                        var str = response.data
+                        var x = str.split("Model number is : ");
+                        $this.formData.finalModelNum = x[1];
                         $this.finalNoModelMsg = ''
                         $this.finalRiskMsg0 = '';
                         $this.finalRiskMsg1 = '';
@@ -456,6 +460,24 @@
             },
             downloadBOQ:function(e){
                 var $this = this
+                var session_url = 'includes/DownloadFileController.php';
+                axios.post(session_url, {
+                    customerData:$this.formData
+                }).then(function(response) {
+					if(response.data != "")
+					{
+						var a = document.createElement('a');
+						var url = response.data;
+						a.href = url;
+						a.download = $this.formData.finalModelNum + ".pdf";
+						document.body.append(a);
+						a.click();
+						a.remove();
+						window.URL.revokeObjectURL(url);
+					}                    
+                }).catch(function(error) {
+                    console.log(error);
+                });
                 e.preventDefault(); 
             }
         },
