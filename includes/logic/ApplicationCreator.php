@@ -2,6 +2,10 @@
 require_once 'CommericalKitchen.php';
 require_once 'STP.php';
 require_once 'OWC.php';
+require_once 'GarbageRoom.php';
+require_once 'WasteSegregationRoom.php';
+require_once 'Washroom.php';
+require_once 'CommercialAndInstitutional.php';
 
 class ApplicationCreator
 {	
@@ -12,19 +16,21 @@ class ApplicationCreator
 	private $strApplication;	
 	
 	private $jCalculationData;
+	
+	private $jCustomerData;
 
 	public function __construct()
 	{
 		$jData = json_decode(file_get_contents('php://input'), true);
-		$jCustomerData = $jData["customerData"];
+		$this->jCustomerData = $jData["customerData"];
 		
-		$this->strSolution = $jCustomerData["CS"];
-		$this->strType = $jCustomerData["CT"];
-		$this->strApplication = $jCustomerData["CA"]["value"];
-		$this->jCalculationData = $jCustomerData["calculationData"];
+		$this->strSolution = $this->jCustomerData["CS"];
+		$this->strType = $this->jCustomerData["CT"];
+		$this->strApplication = $this->jCustomerData["CA"]["value"];
+		$this->jCalculationData = $this->jCustomerData["calculationData"];
 
-		$arrPurpose = $jCustomerData["purpose"]["value"];
-		$strOtherPurpose = $jCustomerData["otherPurpose"]["value"];		
+		$arrPurpose = $this->jCustomerData["purpose"]["value"];
+		$strOtherPurpose = $this->jCustomerData["otherPurpose"]["value"];		
 	}
 
 	public function create()
@@ -45,6 +51,22 @@ class ApplicationCreator
 			{
 				$objApplication = new OWC($this->jCalculationData);
 			}
+			else if(strcasecmp($this->strApplication, "Garbage Room") == 0)
+			{
+				$objApplication = new GarbageRoom($this->jCalculationData);
+			}
+			else if(strcasecmp($this->strApplication, "Waste Segregation Room") == 0)
+			{
+				$objApplication = new WasteSegregationRoom($this->jCalculationData);
+			}
+			else if(strcasecmp($this->strApplication, "Washroom") == 0)
+			{
+				$objApplication = new Washroom($this->jCalculationData);
+			}
+		}
+		else if(strcasecmp($this->strSolution, "Air") == 0 && strcasecmp($this->strType, "Indoor") == 0)
+		{
+			$objApplication = new CommercialAndInstitutional($this->jCustomerData);
 		}
 		else
 		{

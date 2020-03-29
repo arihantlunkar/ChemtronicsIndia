@@ -19,7 +19,7 @@ abstract class Application
 	
 	abstract public function runFormula();
 	
-	abstract public function calculateMultiplicationFactor($fCT); 	
+	abstract protected function calculateModelNo($strType, $fValue);
 }
 
 ?>

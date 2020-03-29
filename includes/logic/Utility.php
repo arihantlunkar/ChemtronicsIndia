@@ -21,11 +21,23 @@ class Utility
 			case "mph":			
 				$fConversion = 0.44704;
 				break;
+			case "f2":
+				$fConversion = 0.09290304;
+				break;
 			default:
 				$fConversion = 1;
 				break;
 		}
 		return $fConversion;
+	}
+	
+	public static function debug_to_console($data) 
+	{
+		$output = $data;
+		if (is_array($output))
+			$output = implode(',', $output);
+
+		echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 	}
 }
 

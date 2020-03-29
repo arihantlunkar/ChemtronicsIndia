@@ -54,7 +54,7 @@ class OWC extends AirSolution implements ApplicationInterface
 		{			
 			$fValue = $fFlowEA * $this->fMF * 3.57;
 			
-			$this->calculateModelNo($fValue);
+			$this->calculateModelNo("Exhaust", $fValue);
 		}
 	}
 	

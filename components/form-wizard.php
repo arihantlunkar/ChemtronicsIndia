@@ -589,7 +589,7 @@
                 }else if(field == 'manufacturingType'){
                     $this.CACTValue = ""
                     $this.CACTOValue = ""
-                    if($this.CAMTOValue!= "Other"){
+                    if($this.CAMTValue!= "Other"){
                         $this.CAMTOValue = ""
                     }
                 }
@@ -686,7 +686,7 @@
                 var ct = this.formData.CT      
                 var caVal = this.formData.CA.value
                 var ca = caVal.replace(/ +/g, ""); 
-                var session_url = 'includes/DownloadFileController.php';
+                var session_url = 'includes/DownloadFileController.php?task=BOQ';
                 axios.post(session_url, {
                     customerData:$this.formData
                 }).then(function(response) {
@@ -695,7 +695,7 @@
 						var a = document.createElement('a');
 						var url = response.data;
 						a.href = url;
-						a.download = ct+'-'+ca+'-'+$this.formData.finalModelNum + ".pdf";
+						a.download = 'BOQ-'+ct+'-'+ca+'-'+$this.formData.finalModelNum + ".pdf";
 						document.body.append(a);
 						a.click();
 						a.remove();
@@ -711,7 +711,7 @@
                 var ct = this.formData.CT      
                 var caVal = this.formData.CA.value
                 var ca = caVal.replace(/ +/g, ""); 
-                var session_url = 'includes/DownloadFileController.php';
+                var session_url = 'includes/DownloadFileController.php?task=TS';
                 axios.post(session_url, {
                     customerData:$this.formData
                 }).then(function(response) {
@@ -720,7 +720,7 @@
 						var a = document.createElement('a');
 						var url = response.data;
 						a.href = url;
-						a.download = ct+'-'+ca+'-'+$this.formData.finalModelNum + ".pdf";
+						a.download = 'TS-'+ct+'-'+ca+'-'+$this.formData.finalModelNum + ".pdf";
 						document.body.append(a);
 						a.click();
 						a.remove();
