@@ -1,4 +1,4 @@
-<template id="commercialKitchen">
+<template id="commercialkitchen">
     <div>
         <div class="row">                                    
             <div class="col-md-6">
@@ -97,8 +97,8 @@
     </div>
 </template>
 <script>
-    var commercialKitchen = Vue.component('commercialKitchen', {
-        template: '#commercialKitchen',
+    var commercialkitchen = Vue.component('commercialkitchen', {
+        template: '#commercialkitchen',
         data: function () {
             return {
                 flowEA:'',

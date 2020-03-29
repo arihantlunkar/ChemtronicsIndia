@@ -1,5 +1,5 @@
 <?php
-    $v = '?v1.8';
+    $v = '?v1.6.1';
 	
 	if (session_status() == PHP_SESSION_NONE) 
 	{

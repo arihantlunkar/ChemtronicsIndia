@@ -28,8 +28,10 @@
 .card.form-control:disabled,.form-control[readonly]{background-color:#fff}
 .card.form-wizard .card-body .text-primary{color:#02b389!important;font-weight:500}
 .card.form-wizard .loadingDiv.loading-cus-ht{height:125px}
-.moving-tab{background-image:linear-gradient(to right,#02b389,#19caa0);box-shadow:0 16px 26px -10px rgba(76,175,80,.56),0 4px 25px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(76,175,80,.2);position:absolute;text-align:center;padding:.5rem 3.2rem!important;font-size:14px;text-transform:uppercase;-webkit-font-smoothing:subpixel-antialiased;top:118px;left:0;border-radius:4px;color:#FFF;cursor:pointer;font-weight:500}
+.moving-tab{background-image:linear-gradient(to right,#02b389,#19caa0);box-shadow:0 16px 26px -10px rgba(76,175,80,.56),0 4px 25px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(76,175,80,.2);position:absolute;text-align:center;padding:.5rem 3.2rem!important;font-size:14px;text-transform:uppercase;-webkit-font-smoothing:subpixel-antialiased;top:137px;left:0;border-radius:4px;color:#FFF;cursor:pointer;font-weight:500}
 @media only screen and (max-width:1167px){.moving-tab{display:none!important}}
 .table-bordered{border:2px solid #f8f8f8}
 .table thead th,.table-bordered td,.table-bordered th{border:none}
 .pdf-content{display: none;}
+.cus-checkbox{display: inline-block;margin-right:10px}
+.checkbox-wrapper{border: 1px solid #ced4da!important;border-radius: .25rem;padding: 10px;}

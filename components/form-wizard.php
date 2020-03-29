@@ -1,15 +1,17 @@
 <?php
-    require_once 'Tab2ApplicationWise/commercial-kitchen.php';
+    require_once 'Tab2ApplicationWise/commercialkitchen.php';
     require_once 'Tab2ApplicationWise/stp.php';
     require_once 'Tab2ApplicationWise/owc.php';
+    require_once 'Tab2ApplicationWise/washroomgarbagewaste.php';
+    require_once 'Tab2ApplicationWise/commercialmanufacturing.php';
     require_once 'pdf-content.php';
 ?>
 <template id="formWizard">
     <div class="col-md-8">
         <div class="card form-wizard">
             <div class="card-header">
-                <h4>Get a Model Number</h4>
-                <h5>This information will give you product model number related to your application.</h5>
+                <h4>Model Selection Guide</h4>
+                <h5>The PROSOFT software will give you most appropriates model on the bases of your submitted site data.</h5>
             </div>
             <div class="card-body">
                 <form>
@@ -37,8 +39,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="type">Type</label>
-                                    <select class="form-control selectpicker show-tick" id="type" v-model="CT">
-                                        <option :value="t.text" :id="t.id" v-for="t in type" :disabled="t.disabled">{{t.text}}</option>
+                                    <select class="form-control selectpicker show-tick" id="type" v-model="CT" @change="validatingIndividualField('type')">
+                                        <option :value="t.text" :id="t.id" v-for="t in type">{{t.text}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -51,17 +53,36 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group" v-show="CAValue == 'Commercial Kitchen'">
-                                    <label for="purpose1">Purpose</label>
-                                    <select class="form-control selectpicker" id="purpose1" v-model="CPValue" @change="validatingIndividualField('purpose')" multiple>
-                                        <option :value="pur.text" v-for="pur in purpose1">{{pur.text}}</option>
+                                <div class="form-group">
+                                    <label for="purpose">Purpose</label>
+                                    <select class="form-control selectpicker show-tick" id="purpose" v-model="CPValue" @change="validatingIndividualField('purpose')" multiple>
+                                        <option :value="pur.text" v-for="pur in purposeData.Air.Exhaust.purpose1" v-if="CAValue == 'Commercial Kitchen'">{{pur.text}}</option>
+                                        <option :value="pur.text" v-for="pur in purposeData.Air.Exhaust.purpose2" v-if="(CAValue == 'STP' || CAValue == 'OWC' || CAValue == 'Garbage Room' || CAValue == 'Waste Segregation Room' || CAValue == 'Washroom')">{{pur.text}}</option>
+                                        <option :value="pur.text" v-for="pur in purposeData.Air.Indoor.purpose1" v-if="CAValue == 'Commercial | Institutional'">{{pur.text}}</option>
+                                        <option :value="pur.text" v-for="pur in purposeData.Air.Indoor.purpose2" v-if="(CAValue == 'Residential' || CAValue == 'Manufacturing Company')">{{pur.text}}</option>
                                     </select>
                                 </div>
-                                <div class="form-group" v-show="CAValue != 'Commercial Kitchen'">
-                                    <label for="purpose2">Purpose</label>
-                                    <select class="form-control selectpicker" id="purpose2" v-model="CPValue" @change="validatingIndividualField('purpose')" multiple>
-                                        <option :value="pur.text" v-for="pur in purpose2">{{pur.text}}</option>
-                                    </select>
+                            </div>                            
+                            <div class="col-md-12">
+                                <div class="form-group checkbox-wrapper" v-if="CAValue == 'Commercial | Institutional'">
+                                    <div v-for="ct in commercialType" class="cus-checkbox">
+                                        <input type="radio" :id="ct" name="ct" :value="ct" v-model="CACTValue" @change="validatingIndividualField('commercialType')">
+                                        <label :for="ct">{{ct}}</label>
+                                    </div>
+                                    <div v-if="CACTValue=='Other'">
+                                        <label for="otherCommercialType">Other Commercial Type</label>
+                                        <input type="text" class="form-control" id="otherCommercialType" v-model="CACTOValue">
+                                    </div>
+                                </div>
+                                <div class="form-group checkbox-wrapper" v-if="CAValue == 'Manufacturing Company'">
+                                    <div v-for="mt in manufacturingType" class="cus-checkbox">
+                                        <input type="radio" :id="mt" name="mt" :value="mt" v-model="CAMTValue" @change="validatingIndividualField('manufacturingType')">
+                                        <label :for="mt">{{mt}}</label>
+                                    </div>
+                                    <div v-if="CAMTValue=='Other'">
+                                        <label for="otherManufacturingType">Other Manufacturing Type</label>
+                                        <input type="text" class="form-control" id="otherManufacturingType" v-model="CAMTOValue">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -70,19 +91,47 @@
                                     <input type="text" class="form-control" id="otherPurpose" v-model="COPValue">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group" v-if="CT=='Indoor'">
+                                    <label for="airconditioning">Air Conditioning</label>
+                                    <select class="form-control selectpicker show-tick" id="airconditioning" v-model="CACValue" @change="validatingIndividualField('airconditioning')" multiple>
+                                        <option :value="ac.text" :id="ac.id" v-for="ac in airconditioning">{{ac.text}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" v-if="CT=='Indoor'">
+                                    <label for="customermovement">Visitor / Customer movement</label>
+                                    <select class="form-control selectpicker show-tick" id="customermovement" v-model="CCMValue">
+                                        <option :value="cm.text" :id="cm.id" v-for="cm in customermovement">{{cm.text}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group" v-if="CACValue.includes('Other')">
+                                    <label for="otherAirConditioning">Other Air Conditioning</label>
+                                    <input type="text" class="form-control" id="otherAirConditioning" v-model="COACValue">
+                                </div>
+                            </div>
                         </div>
                         <div v-show="currentTab === 1">
                             <div class="col-md-12">
                                 <h4 class="info-text"> Now fill the technical requirements for your application.</h4>
                             </div>
                             <div v-if="formData.CA.type == 'Exhaust' && formData.CA.value == 'Commercial Kitchen'">
-                                <commercial-kitchen  @calculationdata="ckData"></commercial-kitchen>
+                                <commercialkitchen  v-if="resetComp" @calculationdata="techData"></commercialkitchen>
                             </div>
                             <div v-if="formData.CA.type == 'Exhaust' && formData.CA.value == 'STP'">
-                                <stp  @calculationdata="stpData"></stp>
+                                <stp  v-if="resetComp" @calculationdata="techData"></stp>
                             </div>
                             <div v-if="formData.CA.type == 'Exhaust' && formData.CA.value == 'OWC'">
-                                <owc  @calculationdata="owcData"></owc>                                
+                                <owc  v-if="resetComp" @calculationdata="techData"></owc>                                
+                            </div>
+                            <div v-if="formData.CA.type == 'Exhaust' && (formData.CA.value == 'Garbage Room' || formData.CA.value == 'Waste Segregation Room' || formData.CA.value == 'Washroom')">
+                                <washroomgarbagewaste v-if="resetComp" @calculationdata="techData"></washroomgarbagewaste>
+                            </div>
+                            <div v-if="formData.CA.type == 'Indoor' && (formData.CA.value == 'Commercial | Institutional' || formData.CA.value == 'Manufacturing Company')">
+                                <commercialmanufacturing v-if="resetComp" @calculationdata="techData"></commercialmanufacturing>
                             </div>
                         </div>
                         <div v-show="currentTab === 2" :class="{loadingDiv:loading}" class="loading-cus-ht">
@@ -109,13 +158,13 @@
                                                     <p><i class="fa fa-info-circle mr-1"></i> Our above model number is as per your technical requirement for <span class="text-primary">{{formData.CA.value}}</span> application under <span class="text-primary">{{formData.CS}}</span> solution of <span class="text-primary">{{formData.CA.type}}</span> type.</p>
                                                 </div>
                                                 <div class="col-md-12 pl-0">
-                                                    <h6>Download your technical requirements</h6>
+                                                    <h6>Download your technical requirements (Submitted Data)</h6>
                                                     <a href="#" class="btn btn-transparent" @click="downloadTechReq">Download Now</a>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 p-4 border-left">
                                                 <a href="#" class="btn btn-primary btn-block" @click="downloadBOQ">Download BOQ</a>
-                                                <!-- <a href="#" class="btn btn-transparent btn-block">Sent Email</a> -->
+                                                <a v-if="formData.CT=='Exhaust'" href="#" class="btn btn-transparent btn-block" @click="downloadTechSpecs">Technical Specs</a>
                                             </div>
                                         </template>
                                     </div>
@@ -172,32 +221,22 @@
                     {
                         id:'indoor',
                         text: 'Indoor',
-                        disabled: true,
                     },
                     {
                         id:'exhaust',
                         text: 'Exhaust',
-                        disabled: false
                     }
                 ],
-                CT: "Exhaust",
+                CT: "",
                 application: {
                     Indoor: [
                         {
-                            id:'commercial',
-                            text: 'Commercial',
+                            id:'commercialInstitutional',
+                            text: 'Commercial | Institutional',
                         },
                         {
-                            id:'institutional',
-                            text: 'Institutional',
-                        },
-                        {
-                            id:'residential',
-                            text: 'Residential',
-                        },
-                        {
-                            id:'manufacturingComapny',
-                            text: 'Manufacturing Comapny',
+                            id:'manufacturingCompany',
+                            text: 'Manufacturing Company',
                         }
                     ],
                     Exhaust: [
@@ -212,65 +251,207 @@
                         {
                             id:'owc',
                             text: 'OWC',
+                        },
+                        {
+                            id:'garbageRoom',
+                            text: 'Garbage Room',
+                        },
+                        {
+                            id:'wasteSegregationRoom',
+                            text: 'Waste Segregation Room',
+                        },
+                        {
+                            id:'washroom',
+                            text: 'Washroom',
                         }
-                        // {
-                        //     id:'garbageRoom',
-                        //     text: 'Garbage Room',
-                        // },
-                        // {
-                        //     id:'wasteSegregationRoom',
-                        //     text: 'Waste Segregation Room',
-                        // }
                     ]
                 }, 
-                CAValue:'Commercial Kitchen',
-                purpose1:[
+                CAValue:'',
+                purposeData:{
+                    Air:{
+                        Indoor:{
+                            purpose1:[
+                                {
+                                    id:'disinfection',
+                                    text:"Disinfection",
+                                },
+                                {
+                                    id:'bacteriaVirusControl',
+                                    text:"Bacteria & Virus Control",
+                                },
+                                {
+                                    id:'enhanceIAQ',
+                                    text:"Enhance IAQ",
+                                },
+                                {
+                                    id:'reduceSBS',
+                                    text:"Reduce SBS",
+                                },
+                                {
+                                    id:'controlCarbonDiOxide',
+                                    text:"Control Carbon Di-oxide",
+                                },
+                                {
+                                    id:'odorControl',
+                                    text:"Odor Control",
+                                },
+                                {
+                                    id:'vocControl',
+                                    text:"VOC Control",
+                                },
+                                {
+                                    id:'toxicPollutantControl',
+                                    text:"Toxic Pollutant Control",
+                                },
+                                {
+                                    id:'suspendedParticulateMatters',
+                                    text:"Suspended Particulate Matters [SPM]",
+                                },
+                                {
+                                    id:'other',
+                                    text:"Other",
+                                },
+                            ],
+                            purpose2:[
+                                {
+                                    id:'airSurfaceDisinfection',
+                                    text:"Air & Surface Disinfection",
+                                },
+                                {
+                                    id:'bacteriaVirusControl',
+                                    text:"Bacteria & Virus Control",
+                                },
+                                {
+                                    id:'enhanceIAQFoodHygiene',
+                                    text:"Enhance IAQ, Food Safety & Hygiene",
+                                },
+                                {
+                                    id:'odorControl',
+                                    text:"Odor Control",
+                                },
+                                {
+                                    id:'vocControl',
+                                    text:"VOC Control",
+                                },
+                                {
+                                    id:'toxicPollutantControl',
+                                    text:"Toxic Pollutant Control",
+                                },
+                                {
+                                    id:'controlSpoilageRejection',
+                                    text:"Control Spoilage & Rejection",
+                                },
+                                {
+                                    id:'increaseShelflife',
+                                    text:"Increase Shelf-life",
+                                },
+                                {
+                                    id:'other',
+                                    text:"Other",
+                                },
+                            ]
+                        },
+                        Exhaust:{
+                            purpose1:[
+                                {
+                                    id:'fireSafety',
+                                    text:"Fire Safety",
+                                },
+                                {
+                                    id:'oilGrease',
+                                    text:"Oil & Grease",
+                                },
+                                {
+                                    id:'odor',
+                                    text:"Odor",
+                                },
+                                {
+                                    id:'toxicPollutants',
+                                    text:"Toxic Pollutants",
+                                },
+                                {
+                                    id:'other',
+                                    text:"Other",
+                                }
+                            ],
+                            purpose2:[
+                                {
+                                    id:'odor',
+                                    text:"Odor",
+                                },
+                                {
+                                    id:'microorganisms',
+                                    text:"Microorganisms",
+                                },
+                                {
+                                    id:'toxicPollutants',
+                                    text:"Toxic Pollutants",
+                                },
+                                {
+                                    id:'other',
+                                    text:"Other",
+                                }
+                            ],
+                        }
+                    }
+                },
+                airconditioning:[
                     {
-                        id:'fireSafety',
-                        text:"Fire Safety",
+                        id:'centralHVAC',
+                        text:"Central HVAC",
                     },
                     {
-                        id:'oilGrease',
-                        text:"Oil & Grease",
+                        id:'fanCoilUnits',
+                        text:"Fan Coil Units [FCU]",
                     },
                     {
-                        id:'odor',
-                        text:"Odor",
+                        id:'cassetteAC',
+                        text:"Cassette ACs",
                     },
                     {
-                        id:'toxicPollutants',
-                        text:"Toxic Pollutants",
+                        id:'windowSplit',
+                        text:"Window / Split",
+                    },
+                    {
+                        id:'columnAC',
+                        text:"Column ACs",
                     },
                     {
                         id:'other',
                         text:"Other",
-                    }
+                    },
                 ],
-                purpose2:[
+                customermovement:[
                     {
-                        id:'odor',
-                        text:"Odor",
+                        id:'light',
+                        text:"Light",
                     },
                     {
-                        id:'microorganisms',
-                        text:"Microorganisms",
+                        id:'medium',
+                        text:"Medium",
                     },
                     {
-                        id:'toxicPollutants',
-                        text:"Toxic Pollutants",
+                        id:'heavy',
+                        text:"Heavy",
                     },
-                    {
-                        id:'other',
-                        text:"Other",
-                    }
                 ],
+                commercialType:['Offices','Banks','Corporate Bldgs','Commercial Places','Hotels','Resort','Auditorium','Conference Hall','Board Room','School','Collages','Library','Day care','Nursery','Creche','Indoor Stadium','Hospital','Healthcare','Gym','Sports Club','Cold Storage','Airport','Mall','Theater','Fire restoration','Fish Market','Slaughter House','Restaurants','Casino','Pub','Smoking Lounge','Butchery','Other'],
+                manufacturingType:['Pharmaceutical','API','Food & Beverage','Bakery','Dairy','Confectionary','Chocolate','Toothpaste','Aquaculture','Pet food','Nutritional Food','Change rooms','Washrooms','Ethylene Control','Warehouse','Mortuary','Garbage Rooms','Garbage Shoots','Other'],
+                CACTValue:'',
+                CACTOValue:'',
+                CAMTValue:'',
+                CAMTOValue:'',
+                CACValue:[], 
+                CCMValue:'',
+                COACValue:'',               
                 CPValue:[],
                 COPValue:'',
                 errorMsg:'',                
                 finalModelNum:'',
                 finalRiskMsg0:'',
                 finalRiskMsg1:'',
-                finalNoModelMsg:''
+                finalNoModelMsg:'',
+                resetComp:false
             };  
         },
         computed: {
@@ -295,11 +476,18 @@
             formData(){
                 var $this = this
                 return {
-                    CS: this.CS,
-                    CT: this.CT,
-                    CA: this.CA,
-                    purpose: this.purpose,
-                    otherPurpose: this.otherPurpose,
+                    CS: $this.CS,
+                    CT: $this.CT,
+                    CA: $this.CA,
+                    purpose: $this.purpose,
+                    otherPurpose: $this.otherPurpose,
+                    CACTValue: $this.CACTValue,
+                    CACTOValue: $this.CACTOValue,
+                    CAMTValue: $this.CAMTValue,
+                    CAMTOValue: $this.CAMTOValue,
+                    CACValue: $this.CACValue,
+                    COACValue: $this.COACValue,
+                    CCMValue: $this.CCMValue,
                     calculationData: {},
                     finalModelNum : ''            
                 }
@@ -309,12 +497,25 @@
             }            
         },
         methods:{
+            resetfunc(){
+                let $this = this
+                $this.resetComp = false
+                Vue.nextTick(function(){
+                    $this.resetComp = true;
+                })
+            },
             validateTab:function(clickedTab){
                 var $this = this
                 if(clickedTab==0){
                     $this.refreshAnimation()
                     $this.currentTab = 0
+                    $this.finalModelNum = ""
+                    $this.formData.finalModelNum = ""
+                    $this.formData.calculationData = ""
                 }else if(clickedTab==1){
+                    $this.finalModelNum = ""
+                    $this.formData.finalModelNum = ""
+                    $this.formData.calculationData = ""
                     $this.validateTab0()
                 }else if(clickedTab==2){
                     $this.validateTab1()
@@ -325,10 +526,21 @@
                 if($this.CS != '' && $this.CT != '' && $this.CA.value != '' && $this.purpose.value.length>0){
                     if($this.purpose.value.includes('Other') && $this.otherPurpose.value==''){
                         $this.errorMsg = "Please fill all the details"
+                    }else if($this.CT == "Indoor"){
+                        if(($this.CA.value=="Commercial | Institutional" && $this.CACTValue == "" || ($this.CACTValue == "Other" && $this.CACTOValue=="")) || ($this.CA.value=="Manufacturing Company" && $this.CAMTValue == "" || ($this.CAMTValue == "Other" && $this.CAMTOValue=="") || ($this.CACValue.length>0 && $this.CACValue.includes('Other') && $this.COACValue=='') ||($this.CACValue.length==0) || ($this.CCMValue==''))){
+                            $this.errorMsg = "Please fill all the details"
+                        }else{
+                            $this.errorMsg = ''
+                            $this.refreshAnimation()
+                            $this.currentTab = 1
+                            $this.resetfunc()
+                            $(".selectpicker").selectpicker("refresh");
+                        }
                     }else{
                         $this.errorMsg = ''
                         $this.refreshAnimation()
                         $this.currentTab = 1
+                        $this.resetfunc()
                         $(".selectpicker").selectpicker("refresh");
                     }
                 }else{
@@ -356,22 +568,33 @@
                     $this.CPValue = []
                     $this.purpose.value = []
                     $this.COPValue = ''
-                    $("#purpose1").val('default').selectpicker("refresh");
-                    $("#purpose2").val('default').selectpicker("refresh");
+                }else if(field == 'type'){
+                    $this.CAValue = ""
+                    $this.CACValue = []
+                    $this.CCMValue = ''
+                    $this.COACValue = ""
+                    $this.CACTValue = ""
+                    $this.CAMTValue = ""
                 }else if(field == 'purpose' && !$this.purpose.value.includes('Other')){
                     $this.otherPurpose.value = ''
                     $this.COPValue = ''
+                }else if(field == 'airconditioning' && !$this.CACValue.includes('Other')){
+                    $this.COACValue = ''
+                }else if(field == 'commercialType'){
+                    $this.CAMTValue = ""
+                    $this.CAMTOValue = ""
+                    if($this.CACTValue != "Other"){
+                        $this.CACTOValue = ""
+                    }
+                }else if(field == 'manufacturingType'){
+                    $this.CACTValue = ""
+                    $this.CACTOValue = ""
+                    if($this.CAMTOValue!= "Other"){
+                        $this.CAMTOValue = ""
+                    }
                 }
             },
-            ckData:function(v){
-                var $this = this
-                $this.formData.calculationData = v
-            },
-            stpData:function(v){
-                var $this = this
-                $this.formData.calculationData = v
-            },
-            owcData:function(v){
+            techData:function(v){
                 var $this = this
                 $this.formData.calculationData = v
             },
@@ -426,9 +649,9 @@
                     move_distance = move_distance * indexTemp;
                     var current = $this.currentTab + 1;
                     if(current == 1){
-                        move_distance -= 8;
+                        move_distance -= 7;
                     }else if(current == total_steps){
-                        move_distance += 8;
+                        move_distance += 7;
                     }
                     $('.form-wizard').find('.moving-tab').css('width', step_width); 
                     var vertical_level = 0;               
@@ -482,10 +705,38 @@
                     console.log(error);
                 });
                 e.preventDefault(); 
-            }
+            },
+            downloadTechSpecs:function(e){
+                var $this = this
+                var ct = this.formData.CT      
+                var caVal = this.formData.CA.value
+                var ca = caVal.replace(/ +/g, ""); 
+                var session_url = 'includes/DownloadFileController.php';
+                axios.post(session_url, {
+                    customerData:$this.formData
+                }).then(function(response) {
+					if(response.data != "")
+					{
+						var a = document.createElement('a');
+						var url = response.data;
+						a.href = url;
+						a.download = ct+'-'+ca+'-'+$this.formData.finalModelNum + ".pdf";
+						document.body.append(a);
+						a.click();
+						a.remove();
+						window.URL.revokeObjectURL(url);
+					}                    
+                }).catch(function(error) {
+                    console.log(error);
+                });
+                e.preventDefault(); 
+            },
         },
         mounted() {     
             this.refreshAnimation()  
+        },
+        updated(){
+            $(".selectpicker").selectpicker("refresh")
         }
     })
 </script>

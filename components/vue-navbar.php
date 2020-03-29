@@ -7,7 +7,7 @@
 <template id="vueNavbar">
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <a class="navbar-brand" href="https://www.chemtronicsindia.com/" target="_blank">
-            <img src="./assets/img/chemtronics-logo.gif" width="175"  class="d-inline-block align-bottom" alt=""> PROSOFT V1.5
+            <img src="./assets/img/chemtronics-logo.gif" width="175"  class="d-inline-block align-bottom" alt=""> PROSOFT V1.6
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -62,7 +62,7 @@
             },
             getMenu:function(){
                 let $this = this
-                fetch('components/menu.json?v1.5')
+                fetch('components/menu.json?v1.6.1')
                 .then((res) => {
                     return res.json();
                 }).then((myJson) => {

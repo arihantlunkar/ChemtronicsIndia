@@ -10,7 +10,7 @@
                 <p class="card-text">This software helps you selecting suitable model for treatment of Air, Water & Waste water for diversified Industries & Applications.</p>
             </div>
             <div class="card-footer">
-                <span class="solution-name mr-1">PROSOFT V1.5,</span> A Solution of <a href="https://www.chemtronicsindia.com/" target="_blank" class="main-website">Chemtronicsindia.com</a>
+                <span class="solution-name mr-1">PROSOFT V1.6,</span> A Solution of <a href="https://www.chemtronicsindia.com/" target="_blank" class="main-website">Chemtronicsindia.com</a>
             </div>
         </div>
     </div>

@@ -173,7 +173,7 @@
                     }else{
                         f = $this.flowEA
                     }
-                    $this.acph = f/(a*h)
+                    $this.acph = (f/(a*h)).toFixed(2)
                     if($this.acph<30){
                         $this.acphInfo = "Minimum ACPH value should be greater than or equal to 30 for better result (ACPH >= 30)"
                     }
