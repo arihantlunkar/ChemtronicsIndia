@@ -11,7 +11,7 @@
         <div class="card form-wizard">
             <div class="card-header">
                 <h4>Model Selection Guide</h4>
-                <h5>The PROSOFT software will give you most appropriates model on the bases of your submitted site data.</h5>
+                <h5>The PROSOFT software will give you most appropriates model on the bases of <br>your submitted site data.</h5>
             </div>
             <div class="card-body">
                 <form>
@@ -94,7 +94,7 @@
                             <div class="col-md-6">
                                 <div class="form-group" v-if="CT=='Indoor'">
                                     <label for="airconditioning">Air Conditioning</label>
-                                    <select class="form-control selectpicker show-tick" id="airconditioning" v-model="CACValue" @change="validatingIndividualField('airconditioning')" multiple>
+                                    <select class="form-control selectpicker show-tick" id="airconditioning" v-model="CACValue" @change="validatingIndividualField('airconditioning')">
                                         <option :value="ac.text" :id="ac.id" v-for="ac in airconditioning">{{ac.text}}</option>
                                     </select>
                                 </div>
@@ -108,7 +108,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <div class="form-group" v-if="CACValue.includes('Other')">
+                                <div class="form-group" v-if="CACValue=='Other'">
                                     <label for="otherAirConditioning">Other Air Conditioning</label>
                                     <input type="text" class="form-control" id="otherAirConditioning" v-model="COACValue">
                                 </div>
@@ -162,9 +162,9 @@
                                                     <a href="#" class="btn btn-transparent" @click="downloadTechReq">Download Now</a>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4 p-4 border-left">
+                                            <div class="col-md-4 p-4 border-left" v-if="formData.CT=='Exhaust'">
                                                 <a href="#" class="btn btn-primary btn-block" @click="downloadBOQ">Download BOQ</a>
-                                                <a v-if="formData.CT=='Exhaust'" href="#" class="btn btn-transparent btn-block" @click="downloadTechSpecs">Technical Specs</a>
+                                                <a href="#" class="btn btn-transparent btn-block" @click="downloadTechSpecs">Technical Specs</a>
                                             </div>
                                         </template>
                                     </div>
@@ -441,7 +441,7 @@
                 CACTOValue:'',
                 CAMTValue:'',
                 CAMTOValue:'',
-                CACValue:[], 
+                CACValue:'', 
                 CCMValue:'',
                 COACValue:'',               
                 CPValue:[],
@@ -527,7 +527,7 @@
                     if($this.purpose.value.includes('Other') && $this.otherPurpose.value==''){
                         $this.errorMsg = "Please fill all the details"
                     }else if($this.CT == "Indoor"){
-                        if(($this.CA.value=="Commercial | Institutional" && $this.CACTValue == "" || ($this.CACTValue == "Other" && $this.CACTOValue=="")) || ($this.CA.value=="Manufacturing Company" && $this.CAMTValue == "" || ($this.CAMTValue == "Other" && $this.CAMTOValue=="") || ($this.CACValue.length>0 && $this.CACValue.includes('Other') && $this.COACValue=='') ||($this.CACValue.length==0) || ($this.CCMValue==''))){
+                        if(($this.CA.value=="Commercial | Institutional" && $this.CACTValue == "" || ($this.CACTValue == "Other" && $this.CACTOValue=="")) || ($this.CA.value=="Manufacturing Company" && $this.CAMTValue == "" || ($this.CAMTValue == "Other" && $this.CAMTOValue=="") || ($this.CACValue!='' && $this.CACValue == "Other" && $this.COACValue=='') || ($this.CACValue=='') || ($this.CCMValue==''))){
                             $this.errorMsg = "Please fill all the details"
                         }else{
                             $this.errorMsg = ''
@@ -570,15 +570,15 @@
                     $this.COPValue = ''
                 }else if(field == 'type'){
                     $this.CAValue = ""
-                    $this.CACValue = []
-                    $this.CCMValue = ''
+                    $this.CACValue = ""
+                    $this.CCMValue = ""
                     $this.COACValue = ""
                     $this.CACTValue = ""
                     $this.CAMTValue = ""
                 }else if(field == 'purpose' && !$this.purpose.value.includes('Other')){
                     $this.otherPurpose.value = ''
                     $this.COPValue = ''
-                }else if(field == 'airconditioning' && !$this.CACValue.includes('Other')){
+                }else if(field == 'airconditioning' && $this.CACValue!="Other"){
                     $this.COACValue = ''
                 }else if(field == 'commercialType'){
                     $this.CAMTValue = ""

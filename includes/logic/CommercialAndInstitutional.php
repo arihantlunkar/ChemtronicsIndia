@@ -61,7 +61,7 @@ class CommercialAndInstitutional extends AirSolution implements ApplicationInter
 	
 	function getApplicationType()
 	{
-		$strApplication = $this->tCalculationData["calculationData"]["CA"]["value"];			
+		$strApplication = $this->tCalculationData["CA"]["value"];			
 
 		$strApplicationType = "";
 		if(strcasecmp($strApplication, "Commercial | Institutional") == 0)

@@ -8,9 +8,9 @@
             <p>Application: <span>{{formdata.CA.value}}</span><span v-if="formdata.CA.value == 'Commercial | Institutional'"> - {{formdata.CACTValue}}</span><span v-if="formdata.CACTValue=='Other'"> - {{formdata.CACTOValue}}</span><span v-if="formdata.CA.value == 'Manufacturing Company'"> - {{formdata.CAMTValue}}</span><span v-if="formdata.CAMTValue=='Other'"> - {{formdata.CAMTOValue}}</span></p>
             <p>Purpose: <span>{{formdata.purpose.value[0]}}</span></p>
             <p v-if="purpose.value.includes('Other')">Other Purpose: <span>{{formdata.otherPurpose.value}}</span></p>
-            <p v-if="formdata.CT=='Indoor'">Air Conditioning: <span v-if="formdata.CACValue.length>0">{{formdata.CACValue[0]}}</span></p>
-            <p v-if="formdata.CACValue.includes('Other')">Other Air Conditioning: <span>{{formdata.COACValue}}</span></p>
-            <p v-if="formdata.CT=='Indoor'">Visitor / Customer movement: <span>{{formdata.COACValue}}</span></p>
+            <p v-if="formdata.CT=='Indoor'">Air Conditioning: <span v-if="formdata.CACValue!=''">{{formdata.CACValue}}</span></p>
+            <p v-if="formdata.CACValue=='Other'">Other Air Conditioning: <span>{{formdata.COACValue}}</span></p>
+            <p v-if="formdata.CT=='Indoor'">Visitor / Customer movement: <span>{{formdata.CCMValue}}</span></p>
         </div>
         <div>
             <h4>Technical requirements</h4>
@@ -48,9 +48,9 @@
             <div v-if="formdata.CA.type == 'Indoor' && (formdata.CA.value == 'Commercial | Institutional' || formdata.CA.value == 'Manufacturing Company') && currenttab === 2">
                 <p>Room Area* : <span>{{formdata.calculationData.req.cmRA}} {{formdata.calculationData.req.cmRAUnitVal}}</span></p>
                 <p>Room Height* : <span>{{formdata.calculationData.req.cmRH}} {{formdata.calculationData.req.cmRHUnitVal}}</span></p>
-                <p>Recirculating Air Flow : <span>{{formdata.calculationData.nonReq.rAirFlow}} {{formdata.calculationData.nonReq.rAirFlowUnitVal}}</span></p>
-                <p>Fresh Air Flow : <span>{{formdata.calculationData.nonReq.fAirFlow}} {{formdata.calculationData.nonReq.fAirFlowUnitVal}}</span></p>
-                <p>Refrigeration Tonnage : <span>{{formdata.calculationData.nonReq.rTonnage}} {{formdata.calculationData.nonReq.rTonnageUnitVal}}</span></p>
+                <p>Recirculating Air Flow : <span v-if="formdata.calculationData.nonReq.rAirFlow!=''">{{formdata.calculationData.nonReq.rAirFlow}} {{formdata.calculationData.nonReq.rAirFlowUnitVal}}</span></p>
+                <p>Fresh Air Flow : <span v-if="formdata.calculationData.nonReq.fAirFlow!=''">{{formdata.calculationData.nonReq.fAirFlow}} {{formdata.calculationData.nonReq.fAirFlowUnitVal}}</span></p>
+                <p>Refrigeration Tonnage : <span v-if="formdata.calculationData.nonReq.rTonnage!=''">{{formdata.calculationData.nonReq.rTonnage}} {{formdata.calculationData.nonReq.rTonnageUnitVal}}</span></p>
                 <p>Air Changes Per Hour : <span>{{formdata.calculationData.nonReq.airChangeHr}}</span></p>
             </div>
         </div>

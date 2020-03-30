@@ -141,7 +141,7 @@
                 lenExDuctUnit:['ft','m'],
                 lenExDuctUnitVal:'ft',
                 exVel:'',
-                exVelUnit:['fpm','fps','mph'],
+                exVelUnit:['fpm','fps','mps'],
                 exVelUnitVal:'fpm',
                 errorMsgIndividual:{
                     stpRA:'',
